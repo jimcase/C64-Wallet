@@ -6,6 +6,9 @@
 The package.json contains following commands:
 
 ```bash
+# install dependencies
+npm install
+
 # starts electron with React and Node in development mode
 npm start
 
