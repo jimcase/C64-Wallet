@@ -16,7 +16,7 @@ Api.get('/processAsset', (req, res) => {
     res.status(200).send('Jaime!')
 });
 
-HTTP.listen(9001, () => {
-    console.log('listening on *:9001');
+HTTP.listen(9002, () => {
+    console.log('listening on *:9002');
 });
 

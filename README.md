@@ -54,4 +54,3 @@ An overview of the folder structure can be found below:
 |
 |-- /src (react source files)
 ```
-

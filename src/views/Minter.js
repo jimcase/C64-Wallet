@@ -1,7 +1,6 @@
 import React from "react";
 
-import {Tab, Col, Nav, Image, Button} from 'react-bootstrap';
-import {Row} from "react-bootstrap";
+import {Button, Col, Image, Nav, Row, Tab} from 'react-bootstrap';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 
@@ -9,7 +8,7 @@ import "../assets/css/layout.css";
 
 import {faHammer, faInfoCircle, faPuzzlePiece} from "@fortawesome/free-solid-svg-icons";
 import {faUnsplash} from "@fortawesome/free-brands-svg-icons";
-import {forEach} from "react-bootstrap/ElementChildren";
+
 import {api} from "../api";
 
 // core components
@@ -84,11 +83,8 @@ class Minter extends React.Component {
         //console.log("nChunks: "+nChunks);
         let base64Length = base64.length;
         //console.log("base64Length: "+base64Length);
-        let dist = base64Length/nChunks;
-        //console.log("distance: "+dist);
 
         let chunckArray = [];
-
         let i, o;
         for (i = 0, o = 0; i < nChunks; ++i, o += this.MAX_SIZE) {
             chunckArray.push(base64.substr(o, this.MAX_SIZE));
