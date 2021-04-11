@@ -1,17 +1,5 @@
-# electron-react-node-boilerblate
+# C64 Minter Wallet
 
-Walkthrough described at https://medium.com/jstack-eu/using-electron-with-react-and-node-b498fbf23272
-
-**Description**
-
-Boilerplate project to quickly get started with Electron, React and Node
-containing following features:
-
-- Electron v5
-- React using react-app-rewired
-- Node using babel to transpile
-- Live reload
-- Packaging of Electron app fully functional
 
 **How to use**
 
@@ -64,6 +52,3 @@ An overview of the folder structure can be found below:
 |-- /src (react source files)
 ```
 
-## License
-
-[CC0 1.0 (Public Domain)](LICENSE.md)
