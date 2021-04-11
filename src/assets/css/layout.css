@@ -1,0 +1,71 @@
+
+html, body, #app, #mainContainer {
+    height: 100%;
+}
+html, body {
+    background-color: #f68b78;
+    overflow-x: hidden;
+}
+#leftBar{
+    height: 100%;
+    background-color: #f68b78;
+}
+#brandBar{
+    font-size: 26px;
+    margin: 10px;
+    margin-bottom: 20px;
+    margin-left: 50px;
+    color: lightyellow;
+}
+#app{
+    height: 100%;
+}
+.menuIcon{
+    margin-right: 3px;
+}
+.nav-item a {
+    text-decoration: none !important;
+    color: white !important;
+    font-weight: bold;
+    font-size: 20px;
+}
+.App{
+    padding: 0 !important;
+    margin: 0 !important;
+    height: 100%;
+}
+#contentRigth{
+    background-color: #f2f2fc;
+}
+#mintTokenTab{
+    padding-top: 20px;
+}
+
+#imagePreview{
+    margin: 5px;
+    margin-top: 20px;
+}
+#imagePreview img{
+    border: 10px solid #555;
+    padding: 3px;
+    max-height: 400px;
+    max-width: 400px;
+}
+#aboutMenu{
+
+}
+#fileUpdatedInfo{
+    margin-top: 20px;
+}
+#fileUpdatedInfo pre {
+
+}
+@media only screen and (max-width: 600px) {
+    #leftBar{
+        max-height: 200px;
+        height: auto;
+    }
+    #aboutMenu{
+        left: 30%;
+    }
+}
