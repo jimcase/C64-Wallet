@@ -1,5 +1,5 @@
 {
-  "name": "electron-react-node-boilerplate",
+  "name": "C64 Minter",
   "version": "1.0.0",
   "description": "An Electron application with React and Node",
   "main": "public/electron.js",
