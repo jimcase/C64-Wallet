@@ -34,6 +34,21 @@ npm run electron-pack
 npm run preelectron-pack
 ```
 
+**Multi-platform**
+
+```bash
+npm run preelectron-pack
+npm run electron-pack
+npm run electron-builder --linux
+npm run electron-builder --mac
+npm run electron-builder --win
+npm run electron-builder --ia32
+npm run electron-builder --x64
+
+# Build app for MacOS, Windows and Linux:
+npm run electron-builder --mwl
+```
+
 **Folder structure**
 
 An overview of the folder structure can be found below:
@@ -46,7 +61,7 @@ An overview of the folder structure can be found below:
 |
 |-- /dist (output of the completely built Electron app)
 |
-|-- /public (contains the index.html, which will be picked up by react-app-rewired)
+|-- /public (contains the index.html and electron.js, which will be picked up by react-app-rewired)
 |
 |-- /scripts (scripts to enable live reload)
 |

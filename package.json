@@ -2,7 +2,7 @@
   "name": "electron-react-node-boilerplate",
   "version": "1.0.0",
   "description": "An Electron application with React and Node",
-  "main": "./main.js",
+  "main": "public/electron.js",
   "homepage": "./",
   "scripts": {
     "start": "concurrently \"npm run react-start\" \"npm run server-start\" \"wait-on http://localhost:3000 && npm run electron-dev\"",
@@ -11,7 +11,7 @@
     "server-build": "babel server --out-dir build-server",
     "server-start": "nodemon --watch server --exec babel-node server/server.js",
     "electron-dev": "node scripts/dev.js scripts/start.js",
-    "electron-pack": "electron-builder -c.extraMetadata.main='./main.js'",
+    "electron-pack": "electron-builder -c.extraMetadata.main='public/electron.js'",
     "preelectron-pack": "npm run react-build && npm run server-build"
   },
   "author": "tbuyse",
