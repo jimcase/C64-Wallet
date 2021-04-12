@@ -68,3 +68,14 @@ An overview of the folder structure can be found below:
 |
 |-- /src (react source files)
 ```
+
+**About dependencies**
+
+Check dependencies:
+
+```bash
+# list packages version
+npm list --depth=0
+# list all packages version
+npm list
+```
