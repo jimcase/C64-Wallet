@@ -42,7 +42,6 @@ npm run electron-pack
 npm run electron-builder --linux
 npm run electron-builder --mac
 npm run electron-builder --win
-npm run electron-builder --ia32
 npm run electron-builder --x64
 
 # Build app for MacOS, Windows and Linux:

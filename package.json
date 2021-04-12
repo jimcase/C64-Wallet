@@ -55,7 +55,7 @@
       "build/**/**/*",
       "build-server/**/**/*",
       "node_modules/**/*",
-      "./main.js"
+      "public/electron.js"
     ],
     "directories": {
       "buildResources": "assets"
