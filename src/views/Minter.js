@@ -31,6 +31,7 @@ class Minter extends React.Component {
             base64Size: 0,
             showLoading: false,
             fileChunks: [],
+            numChunks: 0,
             joinedBase64: '',
             leftOpen: true
         };
@@ -69,18 +70,21 @@ class Minter extends React.Component {
     joinBase64(base64Array){
 
         let base64 = '';
-        for(let i=0; i<base64Array.length; i++){
+        let numChunks = 0;
+        for(let i=0; i<base64Array.length-1; i++){
             base64 = base64.concat(base64Array[i]);
-            //console.log(i+": "+base64Array[i]);
+            console.log(i+" Lengh: "+base64Array[i].length);
+            console.log(i+": "+base64Array[i]);
+            numChunks++;
         }
         //console.log("base64Array: "+base64Array.length);
         this.setState({
-            joinedBase64: base64
+            joinedBase64: base64,
+            numChunks: numChunks
         }, () => {
         });
     }
 
-    getChunkImage(chunk){}
 
     splitBase64(base64){
 
@@ -90,17 +94,17 @@ class Minter extends React.Component {
 
         // Get num iterations
         let nChunks = this.state.base64Size/this.MAX_SIZE;
-        //console.log("base64Size: "+this.state.base64Size);
+        console.log("base64Size: "+this.state.base64Size);
         //console.log("MAX_SIZE: "+this.MAX_SIZE);
-        //console.log("nChunks: "+nChunks);
+        console.log("nChunks: "+nChunks);
         let base64Length = base64.length;
-        //console.log("base64Length: "+base64Length);
+        console.log("base64Length: "+base64Length);
 
         let chunckArray = [];
         let i, o;
         for (i = 0, o = 0; i < nChunks; ++i, o += this.MAX_SIZE) {
             chunckArray.push(base64.substr(o, this.MAX_SIZE));
-            //console.log(i+" chunk & csize "+o+": "+base64.substr(o, this.MAX_SIZE));
+            console.log(i+" chunk & csize "+o+": "+base64.substr(o, this.MAX_SIZE));
         }
         // One more iteration
         chunckArray.push(base64.substr(o, base64Length-o));
@@ -260,7 +264,6 @@ class Minter extends React.Component {
                             </div>
                             <div className='content'>
                                 <Container>
-                                <h3>Main content</h3><br/>
                                 <h3>Upload Asset</h3>
                                 <input type="file" accept=".jpg,.jpeg,.png,.gif,.svg" onChange={ this.handleChange}/>
 
@@ -277,7 +280,7 @@ class Minter extends React.Component {
                                                 <p>{this.state.base64Size/1024} kb</p>
 
 
-                                                <p>Num chunks: {this.state.fileChunks.length}</p>
+                                                <p>Num chunks: {this.state.numChunks}</p>
                                                 <p>Joined base64</p>
                                                 {this.state.joinedBase64 ? (
                                                     <div id="imgPreviewContainer">
