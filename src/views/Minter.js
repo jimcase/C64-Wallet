@@ -214,7 +214,6 @@ class Minter extends React.Component {
                                 <h3>Upload Asset</h3>
                                 <input type="file" onChange={ this.handleChange}/>
 
-
                                 {this.state.file ? (
                                     <div>
                                         <Row id="fileUpdatedInfo">

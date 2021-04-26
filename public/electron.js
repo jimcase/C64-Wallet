@@ -18,13 +18,15 @@ if (require("electron-squirrel-startup")) {
 function createWindow() {
     // Create the browser window.
     const win = new BrowserWindow({
-            minWidth: 800,
-            width: 1200,
+
+            width: 1400,
             height: 600,
-            minHeight: 600,
-            autoHideMenuBar: true,
-            useContentSize: true,
-            resizable: false,
+            maxHeight: 900,
+            minWidth: 900,
+
+            //autoHideMenuBar: true,
+            //useContentSize: true,
+            resizable: true,
 
             webSecurity: true,
             contextIsolation: true,
