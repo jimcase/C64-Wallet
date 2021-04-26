@@ -4,7 +4,8 @@ import {Button, Col, Image, Nav, Row, Tab} from 'react-bootstrap';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 
-import "../assets/css/layout.css";
+
+import "../assets/scss/layout.scss";
 
 import {faHammer, faInfoCircle, faPuzzlePiece} from "@fortawesome/free-solid-svg-icons";
 import {faUnsplash} from "@fortawesome/free-brands-svg-icons";
@@ -27,10 +28,16 @@ class Minter extends React.Component {
             base64Size: 0,
             showLoading: false,
             fileChunks: [],
-            joinedBase64: ''
+            joinedBase64: '',
+            leftOpen: true
         };
 
         this.handleChange = this.handleChange.bind(this);
+    }
+
+    toggleSidebar = (event) => {
+        let key = `${event.currentTarget.parentNode.id}Open`;
+        this.setState({ [key]: !this.state[key] });
     }
 
 
@@ -152,100 +159,100 @@ class Minter extends React.Component {
 
     render() {
 
+        let leftOpen = this.state.leftOpen ? 'open' : 'closed';
 
         return (
             <>
                 <div className="App">
-                    <Tab.Container id="left-tabs-example" defaultActiveKey="first">
-                        <Row style={{height: '100%'}}>
-                            <Col id="leftBar" sm={3}>
-                                <Nav id="sidebar" variant="" className="flex-column">
-                                    <div id="brandBar">
-                                        <FontAwesomeIcon icon={faPuzzlePiece}/>
-                                        <span>
-                                            C64
-                                        </span>
-                                    </div>
-
-                                    <Nav.Item>
-                                        <Nav.Link eventKey="first">
-                                            <FontAwesomeIcon className="menuIcon" icon={faHammer}/>
-                                            <span>Mint NFT</span>
-                                        </Nav.Link>
-                                    </Nav.Item>
-                                    <Nav.Item>
-                                        <Nav.Link eventKey="second">
-                                            <FontAwesomeIcon className="menuIcon" icon={faUnsplash}/>
-                                            <span>Gallery</span>
-                                        </Nav.Link>
-                                    </Nav.Item>
-                                    <Nav.Item id="aboutMenu">
-                                        <Nav.Link eventKey="third">
-                                            <FontAwesomeIcon className="menuIcon"  icon={faInfoCircle}/>
-                                            <span>About</span>
-                                        </Nav.Link>
-                                    </Nav.Item>
-                                </Nav>
-                            </Col>
-                            <Col id="contentRigth" sm={9}>
-                                <Tab.Content>
-                                    <Tab.Pane eventKey="first">
-                                        <div id="mintTokenTab">
-                                            <h3>Upload Asset</h3>
-                                            <input type="file" onChange={ this.handleChange}/>
 
 
-                                            {this.state.file ? (
-                                                <div>
-                                                    <Row id="fileUpdatedInfo">
-                                                        <Col sm={5}>
-                                                            <h5>Tmp file: </h5>
-                                                            <pre>{this.state.file}</pre>
-                                                            <h5>Base64</h5>
-                                                            <pre>{this.state.base64}</pre>
-                                                            <h5>Size</h5>
-                                                            <p>{this.state.base64Size} bytes</p>
-                                                            <p>{this.state.base64Size/1024} kb</p>
+                    <div id='layout'>
+
+                        <div id='left' className={leftOpen} >
+                            <div className='icon'
+                                 onClick={this.toggleSidebar} >
+                                &equiv;
+                            </div>
+                            <div className={`sidebar ${leftOpen}`} >
+                                <div className='header'>
+                                    <h3 className='title'>
+                                        Left header
+                                    </h3>
+                                </div>
+                                <div className='content'>
+                                    <h3>Sidebar</h3>
+                                    <ul>
+                                        <li>
+                                            NFTs Minter
+                                        </li>
+                                        <li>
+                                            Gallery
+                                        </li>
+                                        <li>
+                                            About
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id='main'>
+                            <div className='header'>
+                                <h3 className={`
+                      title
+                      ${'left-' + leftOpen}
+                     
+                  `}>
+                                    Main header
+                                </h3>
+                            </div>
+                            <div className='content'>
+                                <h3>Main content</h3><br/>
+                                <h3>Upload Asset</h3>
+                                <input type="file" onChange={ this.handleChange}/>
+
+
+                                {this.state.file ? (
+                                    <div>
+                                        <Row id="fileUpdatedInfo">
+                                            <Col sm={5}>
+                                                <h5>Tmp file: </h5>
+                                                <pre>{this.state.file}</pre>
+                                                <h5>Base64</h5>
+                                                <pre>{this.state.base64}</pre>
+                                                <h5>Size</h5>
+                                                <p>{this.state.base64Size} bytes</p>
+                                                <p>{this.state.base64Size/1024} kb</p>
 
 
 
-                                                            <p>Joined base64</p>
-                                                            {this.state.joinedBase64 ? (
-                                                                <div className={""}>
-                                                                    <Image src={this.state.joinedBase64} fluid />
-                                                                </div>
-                                                            ) : null}
+                                                <p>Joined base64</p>
+                                                {this.state.joinedBase64 ? (
+                                                    <div className={""}>
+                                                        <Image src={this.state.joinedBase64} fluid />
+                                                    </div>
+                                                ) : null}
 
 
-                                                            <Button variant="secondary" size="lg" block onClick={() => this.handleAsset()}>
-                                                                Mint NFT
-                                                            </Button>
-                                                            <p>Estimated cost: _₳</p>
-                                                        </Col>
-                                                        <Col sm={7}>
-                                                            <div id="imagePreview">
-                                                                <Image src={this.state.file} fluid />
-                                                            </div>
-                                                        </Col>
-
-
-                                                    </Row>
+                                                <Button variant="secondary" size="lg" block onClick={() => this.handleAsset()}>
+                                                    Mint NFT
+                                                </Button>
+                                                <p>Estimated cost: _₳</p>
+                                            </Col>
+                                            <Col sm={7}>
+                                                <div id="imagePreview">
+                                                    <Image src={this.state.file} fluid />
                                                 </div>
-                                            ) : null}
+                                            </Col>
 
-                                        </div>
 
-                                    </Tab.Pane>
-                                    <Tab.Pane eventKey="second">
-                                        Hola2
-                                    </Tab.Pane>
-                                    <Tab.Pane eventKey="third">
-                                        Hola3
-                                    </Tab.Pane>
-                                </Tab.Content>
-                            </Col>
-                        </Row>
-                    </Tab.Container>
+                                        </Row>
+                                    </div>
+                                ) : null}
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </>
         );
