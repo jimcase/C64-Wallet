@@ -22,7 +22,7 @@ class Minter extends React.Component {
     constructor(props) {
         super(props);
 
-        this.MAX_SIZE = 14000;
+        this.MAX_SIZE = 14336; //14kb
 
         this.state = {
             file: '',
@@ -73,8 +73,8 @@ class Minter extends React.Component {
         let numChunks = 1;
         for(let i=0; i<base64Array.length; i++){
             base64 = base64.concat(base64Array[i]);
-            console.log(i+" Lengh: "+base64Array[i].length);
-            console.log(i+": "+base64Array[i]);
+            //console.log(i+" Lengh: "+base64Array[i].length);
+            //console.log(i+": "+base64Array[i]);
             numChunks++;
         }
         //console.log("base64Array: "+base64Array.length);
@@ -115,6 +115,7 @@ class Minter extends React.Component {
             fileChunks: chunckArray
         }, () => {
 
+            console.log(this.state.fileChunks);
             this.joinBase64(this.state.fileChunks);
 
             this.setState({
