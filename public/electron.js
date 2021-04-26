@@ -18,6 +18,25 @@ if (require("electron-squirrel-startup")) {
 function createWindow() {
     // Create the browser window.
     const win = new BrowserWindow({
+            minWidth: 800,
+            width: 1200,
+            height: 600,
+            minHeight: 600,
+            autoHideMenuBar: true,
+            useContentSize: true,
+            resizable: false,
+
+            webSecurity: true,
+            contextIsolation: true,
+            nodeIntegration: false,
+            nativeWindowOpen: true,
+            enableRemoteModule: false,
+            sandbox: true,
+            partition: 'persist:tmp',
+
+    })
+    /*
+    const win = new BrowserWindow({
         webPreferences: {
             minWidth: 800,
             width: 800,
@@ -36,6 +55,7 @@ function createWindow() {
             partition: 'persist:tmp',
         }
     })
+     */
 
     // and load the index.html of the app.
     // win.loadFile("index.html");

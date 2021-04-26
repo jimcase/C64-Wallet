@@ -1,5 +1,5 @@
 {
-  "name": "c64-mintergi",
+  "name": "c64-minter",
   "version": "1.0.0",
   "description": "An Electron application with React and Node",
   "main": "public/electron.js",

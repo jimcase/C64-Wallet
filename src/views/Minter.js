@@ -1,11 +1,12 @@
 import React from "react";
 
-import {Button, Col, Image, Nav, Row, Tab} from 'react-bootstrap';
+import {Button, Col, Container, Image, Nav, Row, Tab} from 'react-bootstrap';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Link} from 'react-router-dom';
 
 
 import "../assets/scss/layout.scss";
+import "../assets/css/layout.css";
 
 import {faHammer, faInfoCircle, faPuzzlePiece} from "@fortawesome/free-solid-svg-icons";
 import {faUnsplash} from "@fortawesome/free-brands-svg-icons";
@@ -208,6 +209,7 @@ class Minter extends React.Component {
                                 </h3>
                             </div>
                             <div className='content'>
+                                <Container>
                                 <h3>Main content</h3><br/>
                                 <h3>Upload Asset</h3>
                                 <input type="file" onChange={ this.handleChange}/>
@@ -216,7 +218,7 @@ class Minter extends React.Component {
                                 {this.state.file ? (
                                     <div>
                                         <Row id="fileUpdatedInfo">
-                                            <Col sm={5}>
+                                            <Col sm={12}>
                                                 <h5>Tmp file: </h5>
                                                 <pre>{this.state.file}</pre>
                                                 <h5>Base64</h5>
@@ -229,8 +231,8 @@ class Minter extends React.Component {
 
                                                 <p>Joined base64</p>
                                                 {this.state.joinedBase64 ? (
-                                                    <div className={""}>
-                                                        <Image src={this.state.joinedBase64} fluid />
+                                                    <div id="imgPreviewContainer">
+                                                        <Image className={"imgPreview"} src={this.state.joinedBase64} fluid />
                                                     </div>
                                                 ) : null}
 
@@ -240,16 +242,12 @@ class Minter extends React.Component {
                                                 </Button>
                                                 <p>Estimated cost: _₳</p>
                                             </Col>
-                                            <Col sm={7}>
-                                                <div id="imagePreview">
-                                                    <Image src={this.state.file} fluid />
-                                                </div>
-                                            </Col>
 
 
                                         </Row>
                                     </div>
                                 ) : null}
+                                </Container>
                             </div>
                         </div>
 

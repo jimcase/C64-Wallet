@@ -51,9 +51,9 @@ body {
 }
 
 // Style in common for both sidebars:
-#left, #right { transition: width var(--secs); width: 0;
+#left { transition: width var(--secs); width: 0;
   @media (orientation: landscape) {
-    &.open { width: calc(1% * var(--landscape-width)); }
+    &.open { width: calc(0.5% * var(--landscape-width)); }
   } // <-- Landscape ONLY sidebars
   .icon { position: fixed; z-index: 10;
     width: var(--header-height); height: var(--header-height);
@@ -62,7 +62,7 @@ body {
   }
   .sidebar { transition: transform var(--secs); // <-- Portrait AND landscape!
     @media (orientation: portrait) { width: var(--portrait-width); }
-    @media (orientation: landscape) { width: calc(1vw * var(--landscape-width)); }
+    @media (orientation: landscape) { width: calc(0.5vw * var(--landscape-width)); }
     .header { width: calc(100% - var(--header-height)); }
   }
 }
@@ -72,14 +72,5 @@ body {
   .sidebar { background: var(--bg-left);
     &.closed { transform: translateX(-100%); } // <-- Left portrait AND landscape!
     .header { left: var(--header-height); }
-  }
-}
-
-// Right sidebar specific style:
-#right { .icon { right: 0; }
-  .sidebar { background: var(--bg-right);
-    @media (orientation: portrait) {
-      &.open { transform: translateX(-100%); }
-    } // <-- Right portrait sidebar ONLY!
   }
 }
