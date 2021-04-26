@@ -1,12 +1,14 @@
 import React from "react";
 
-import {Button, Col, Container, Image, Nav, Row, Tab} from 'react-bootstrap';
+import {Button, Col, Container, Image as Img, Nav, Row, Tab} from 'react-bootstrap';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Link} from 'react-router-dom';
 
 
 import "../assets/scss/layout.scss";
 import "../assets/css/layout.css";
+
+import * as FaIcons from "react-icons/fa"
 
 import {faHammer, faInfoCircle, faPuzzlePiece} from "@fortawesome/free-solid-svg-icons";
 import {faUnsplash} from "@fortawesome/free-brands-svg-icons";
@@ -32,6 +34,8 @@ class Minter extends React.Component {
             joinedBase64: '',
             leftOpen: true
         };
+        // this.myCanvasRef = React.createRef();
+        // <canvas id="viewport" ref={(c) => this.setRefCanvas(c)}/>
 
         this.handleChange = this.handleChange.bind(this);
     }
@@ -125,6 +129,7 @@ class Minter extends React.Component {
             fileSource: event.target.files[0]
         }, () => {
 
+            //this.splitAndShowImage();
             this.readFileDataAsBase64(file).then(r =>{
                 this.setState({
                     base64: r,
@@ -158,6 +163,45 @@ class Minter extends React.Component {
         });
     }
 
+    splitAndShowImage(){
+
+        let canvas = this.myCanvasRef.current;
+        let base_image = new window.Image();
+        base_image.src = this.state.file;
+
+        base_image.onload = () => {
+            const scaleX = base_image.naturalWidth / base_image.width;
+            const scaleY = base_image.naturalHeight / base_image.height;
+
+
+
+            console.log(base_image.naturalWidth, base_image.naturalHeight)
+            console.log(base_image.width, base_image.height)
+            //this.canvasContext.drawImage(base_image,0, 0,500,50,0,0,100,50);
+            /*
+                The image object (as returned by document.getElementById() )
+                The X coordinate of the area to select
+                The Y coordinate of the area to select
+                The width of the area to select
+                The height of the area to select
+                The X coordinate to draw the image at
+                The Y coordinate to draw the image at
+                The width to draw the image
+                The height to draw the image
+            */
+            this.canvasContext.drawImage(base_image,0, 0,485,50,0,0,485,50);
+            console.log("base_image.src: "+base_image.src);
+        };
+
+    }
+
+    setRefCanvas(c){
+        if (c){
+            this.canvasContext = c.getContext('2d');
+        }
+
+    }
+
     render() {
 
         let leftOpen = this.state.leftOpen ? 'open' : 'closed';
@@ -176,24 +220,30 @@ class Minter extends React.Component {
                             </div>
                             <div className={`sidebar ${leftOpen}`} >
                                 <div className='header'>
-                                    <h3 className='title'>
-                                        C64 Minter
+                                    <h3 id='sidebarTitle'>
+                                        C64
                                     </h3>
                                 </div>
-                                <div className='content'>
-                                    <h3>Sidebar</h3>
-                                    <ul>
-                                        <li>
-                                            <a href='/'>NFTs Minter</a>
-                                        </li>
-                                        <li>
-                                            <a href='/gallery'>Gallery</a>
+                                <div id="leftMenu" className=''>
+                                    <div className='sidebarLink'>
+                                        <a href='/'>
+                                            <FaIcons.FaHome className="sidebarIcons"/>
+                                            NFTs Minter
+                                        </a>
+                                    </div>
 
-                                        </li>
-                                        <li>
-                                            About
-                                        </li>
-                                    </ul>
+                                    <div className='sidebarLink'>
+                                        <a href='/gallery'>
+                                            <FaIcons.FaImages className="sidebarIcons"/>
+                                            Gallery
+                                        </a>
+                                    </div>
+
+                                    <div className='sidebarLink'>
+                                        <FaIcons.FaInfo className="sidebarIcons"/>
+                                        About
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -212,7 +262,7 @@ class Minter extends React.Component {
                                 <Container>
                                 <h3>Main content</h3><br/>
                                 <h3>Upload Asset</h3>
-                                <input type="file" onChange={ this.handleChange}/>
+                                <input type="file" accept=".jpg,.jpeg,.png,.gif,.svg" onChange={ this.handleChange}/>
 
                                 {this.state.file ? (
                                     <div>
@@ -227,11 +277,13 @@ class Minter extends React.Component {
                                                 <p>{this.state.base64Size/1024} kb</p>
 
 
-
+                                                <p>Num chunks: {this.state.fileChunks.length}</p>
                                                 <p>Joined base64</p>
                                                 {this.state.joinedBase64 ? (
                                                     <div id="imgPreviewContainer">
-                                                        <Image className={"imgPreview"} src={this.state.joinedBase64} fluid />
+                                                        <Img className={"imgPreview"} src={this.state.joinedBase64} fluid />
+                                                        <br/>
+
                                                     </div>
                                                 ) : null}
 
