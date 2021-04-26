@@ -1,10 +1,9 @@
 
 #imgPreviewContainer{
-    text-align: center;
+    margin-top: 1rem;
 }
 .imgPreview{
-    max-width: 20%;
-    max-height: 20%;
+
 }
 canvas#viewport { border: 1px solid white; width: 900px; }
 

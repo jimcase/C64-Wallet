@@ -70,8 +70,8 @@ class Minter extends React.Component {
     joinBase64(base64Array){
 
         let base64 = '';
-        let numChunks = 0;
-        for(let i=0; i<base64Array.length-1; i++){
+        let numChunks = 1;
+        for(let i=0; i<base64Array.length; i++){
             base64 = base64.concat(base64Array[i]);
             console.log(i+" Lengh: "+base64Array[i].length);
             console.log(i+": "+base64Array[i]);
@@ -94,20 +94,22 @@ class Minter extends React.Component {
 
         // Get num iterations
         let nChunks = this.state.base64Size/this.MAX_SIZE;
-        console.log("base64Size: "+this.state.base64Size);
+        //console.log("base64Size: "+this.state.base64Size);
         //console.log("MAX_SIZE: "+this.MAX_SIZE);
-        console.log("nChunks: "+nChunks);
+        //console.log("nChunks: "+nChunks);
         let base64Length = base64.length;
-        console.log("base64Length: "+base64Length);
+        //console.log("base64Length: "+base64Length);
 
         let chunckArray = [];
         let i, o;
         for (i = 0, o = 0; i < nChunks; ++i, o += this.MAX_SIZE) {
             chunckArray.push(base64.substr(o, this.MAX_SIZE));
-            console.log(i+" chunk & csize "+o+": "+base64.substr(o, this.MAX_SIZE));
+            //console.log(i+" chunk & csize "+o+": "+base64.substr(o, this.MAX_SIZE));
         }
         // One more iteration
-        chunckArray.push(base64.substr(o, base64Length-o));
+        if (base64.substr(o, base64Length-o).length > 0) {
+            chunckArray.push(base64.substr(o, base64Length - o));
+        }
 
         this.setState({
             fileChunks: chunckArray
@@ -271,30 +273,38 @@ class Minter extends React.Component {
                                     <div>
                                         <Row id="fileUpdatedInfo">
                                             <Col sm={12}>
-                                                <h5>Tmp file: </h5>
-                                                <pre>{this.state.file}</pre>
-                                                <h5>Base64</h5>
-                                                <pre>{this.state.base64}</pre>
-                                                <h5>Size</h5>
-                                                <p>{this.state.base64Size} bytes</p>
-                                                <p>{this.state.base64Size/1024} kb</p>
 
-
-                                                <p>Num chunks: {this.state.numChunks}</p>
-                                                <p>Joined base64</p>
                                                 {this.state.joinedBase64 ? (
                                                     <div id="imgPreviewContainer">
-                                                        <Img className={"imgPreview"} src={this.state.joinedBase64} fluid />
-                                                        <br/>
+                                                        <Row>
+                                                            <Col sm={6}>
+                                                                <h5>Tmp file: </h5>
+                                                                <pre>{this.state.file}</pre>
+                                                                <h5>Base64</h5>
+                                                                <p>Joined base64</p>
+                                                                <pre>{this.state.base64}</pre>
+                                                                <h5>Size</h5>
+                                                                <p>{this.state.base64Size} bytes</p>
+                                                                <p>{this.state.base64Size/1024} kb</p>
+
+
+                                                                <p>Num chunks: {this.state.fileChunks.length}</p>
+                                                            </Col>
+                                                            <Col sm={6}>
+                                                                <Img className={"imgPreview"} src={this.state.joinedBase64} fluid />
+                                                            </Col>
+                                                        </Row>
+
 
                                                     </div>
                                                 ) : null}
 
 
+                                                <p>Estimated cost: _₳</p>
                                                 <Button variant="secondary" size="lg" block onClick={() => this.handleAsset()}>
                                                     Mint NFT
                                                 </Button>
-                                                <p>Estimated cost: _₳</p>
+
                                             </Col>
 
 
