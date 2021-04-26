@@ -2,7 +2,7 @@ import React from "react";
 
 import {Button, Col, Image, Nav, Row, Tab} from 'react-bootstrap';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-
+import {Link} from 'react-router-dom';
 
 
 import "../assets/scss/layout.scss";
@@ -176,17 +176,18 @@ class Minter extends React.Component {
                             <div className={`sidebar ${leftOpen}`} >
                                 <div className='header'>
                                     <h3 className='title'>
-                                        Left header
+                                        C64 Minter
                                     </h3>
                                 </div>
                                 <div className='content'>
                                     <h3>Sidebar</h3>
                                     <ul>
                                         <li>
-                                            NFTs Minter
+                                            <a href='/'>NFTs Minter</a>
                                         </li>
                                         <li>
-                                            Gallery
+                                            <a href='/gallery'>Gallery</a>
+
                                         </li>
                                         <li>
                                             About

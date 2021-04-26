@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react';
 import {api} from './api';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Minter from "./views/Minter";
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import Gallery from "./views/Gallery";
 
 const App = () => {
     const [successText, setSuccessText] = useState(null);
@@ -13,11 +15,12 @@ const App = () => {
     });
 
     return (
-        <div id="mainContainer">
-            <Minter/>
-            <p>Hello from Expressjs server: {successText}</p>
-            <p>{successText}</p>
-        </div>
+        <Router>
+            <Switch>
+                <Route path='/' exact component={Minter}/>
+                <Route path='/gallery' exact component={Gallery}/>
+            </Switch>
+        </Router>
     );
 };
 
