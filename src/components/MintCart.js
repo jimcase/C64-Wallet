@@ -1,6 +1,6 @@
 import React from "react";
 import {Button, Col, Image, Row} from "react-bootstrap";
-import "../assets/scss/invoice.scss"
+import "../assets/scss/mintCart.scss"
 // core components
 
 class MintCart extends React.Component {

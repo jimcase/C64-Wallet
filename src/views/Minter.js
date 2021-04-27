@@ -1,6 +1,6 @@
 import React from "react";
 
-import {Button, Col, Container, Image as Img, Nav, Row, Tab} from 'react-bootstrap';
+import {Button, Col, Container, Image as Img, Nav, Row, Tab, Form} from 'react-bootstrap';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Link} from 'react-router-dom';
 
@@ -288,6 +288,16 @@ class Minter extends React.Component {
 
 
                                                                 <p>Num chunks: {this.state.fileChunks.length}</p>
+
+                                                                <div>
+                                                                    <h3>PGP Sign</h3>
+                                                                    <Form.Label>Select identity</Form.Label>
+                                                                    <Form.Control as="select">
+                                                                        <option>artist@nftify.io</option>
+                                                                        <option>personal@gmail.com</option>
+                                                                        <option>Atala Prism</option>
+                                                                    </Form.Control>
+                                                                </div>
                                                             </Col>
                                                             <Col sm={6}>
                                                                 <Img className={"imgPreview"} src={this.state.joinedBase64} fluid />
