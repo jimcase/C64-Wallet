@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, Col, Image, Row} from "react-bootstrap";
+import {Button, Col, Form, Image, Row} from "react-bootstrap";
 import "../assets/scss/mintCart.scss"
 // core components
 
@@ -77,6 +77,12 @@ class MintCart extends React.Component {
                             </ul>
                         </div>
 
+                        <Form.Label>Select endpoint</Form.Label>
+                        <Form.Control as="select">
+                            <option>Dandelion APIs [PEACE]</option>
+                            <option>Ada Booster SP [BOOST]</option>
+                            <option>Lift SP [LIFT]</option>
+                        </Form.Control>
                         <Button variant="secondary" size="lg" block onClick={null}>
                             Mint NFT
                         </Button>
