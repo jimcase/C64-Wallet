@@ -4,18 +4,19 @@ import {Button, Col, Container, Image as Img, Nav, Row, Tab, Form} from 'react-b
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Link} from 'react-router-dom';
 import Magnifier from 'react-magnifier';
-
+import parseUri from 'parse-uri'
 
 import "../assets/scss/layout.scss";
 import "../assets/css/layout.css";
 
 import * as FaIcons from "react-icons/fa"
-
+import mime from 'mime-types'
 import {faHammer, faInfoCircle, faPuzzlePiece} from "@fortawesome/free-solid-svg-icons";
 import {faUnsplash} from "@fortawesome/free-brands-svg-icons";
 
 import {api} from "../api";
 import MintCart from "../components/MintCart";
+import axios from "axios";
 
 // core components
 
@@ -130,14 +131,11 @@ class Minter extends React.Component {
         });
         let file = event.target.files[0];
 
-
-
         this.setState({
             file: URL.createObjectURL(file),
             fileSource: event.target.files[0]
         }, () => {
 
-            //this.splitAndShowImage();
             this.readFileDataAsBase64(file).then(r =>{
                 this.setState({
                     base64: r,
@@ -147,7 +145,6 @@ class Minter extends React.Component {
                     this.setState({
                         showLoading: false
                     });
-                    //console.log(this.state.base64);
                     this.splitBase64(this.state.base64);
                 });
             });
@@ -155,6 +152,59 @@ class Minter extends React.Component {
     }
 
 
+    buildHTTPMetadatasFromFile(customHeaders) {
+
+        const HTTP_RESPONSE_METADATUM = 104116116112;
+
+        let metadataObj = {};
+        let headers = {};
+
+        if (customHeaders) {
+            headers = customHeaders;
+        }
+
+        if ( ! headers['Content-Type'] ) {
+            headers['Content-Type'] = mime.lookup(this.state.file);
+        }
+
+        metadataObj[HTTP_RESPONSE_METADATUM] = {}
+        headers['Content-Transfer-Encoding'] = "base64"
+
+        // split data in diff txs
+        let _nextTx = "_PLACEHOLDER_";
+        let bas64Chunks = this.state.fileChunks;
+
+        let metadataTxs= []
+        for (let i=0; i<bas64Chunks.length; i++){
+            metadataObj[HTTP_RESPONSE_METADATUM] = {
+                _nextTx: _nextTx, // TODO get next tx hash, bas64Chunks.length-1 times
+                headers: headers,
+                response:
+                    {
+                        data: bas64Chunks[i]
+                    }
+            }
+            metadataTxs.push(metadataObj);
+        }
+
+        return metadataTxs;
+
+    }
+
+    async getMetadataFromTxId(txId, metadataKey, grapqhlEndpoint) {
+
+        let graphqlQuery = "{ transactions( where: { hash: { _eq: "+txId+" }, metadata: { key: { _eq: "+metadataKey+" } } } ) { metadata { value } } }";
+
+        axios.post(grapqhlEndpoint, { query: graphqlQuery }).then(r => {
+            let fullData = []
+            let actualData = r.data.data.transactions[0].metadata[0].value.response.data
+            let completeResponse = {}
+            let keepGoing = true;
+            fullData = fullData.concat(actualData);
+            let counter = 0;
+        })
+
+    }
 
 
     readFileDataAsBase64(f) {
