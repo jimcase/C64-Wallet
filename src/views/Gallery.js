@@ -95,7 +95,7 @@ class Gallery extends React.Component {
                             <div className={`sidebar ${leftOpen}`} >
                                 <div className='header'>
                                     <h3 id='sidebarTitle'>
-                                        _
+                                        C64
                                     </h3>
                                 </div>
                                 <div id="leftMenu" className=''>

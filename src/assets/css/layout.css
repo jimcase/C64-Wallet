@@ -25,7 +25,9 @@ canvas#viewport { border: 1px solid white; width: 900px; }
     text-decoration:none;
 }
 #sidebarTitle{
-    padding: 10px;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    margin-right: 60px;
 }
 .sidebarLink{
     text-align: left;

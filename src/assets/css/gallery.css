@@ -139,3 +139,7 @@
     background-color: #ca6a9a !important;
     border-color: #ca6a9a !important;
 }
+.selectEndpointLabel,
+.selectEndpointInput{
+    margin: 2px;
+}

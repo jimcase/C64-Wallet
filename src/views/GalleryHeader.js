@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button, Input, Dropdown, Menu, Switch } from 'antd'
 import * as FaIcons from "react-icons/fa"
+import {Form} from "react-bootstrap";
 export default function({
                             shuffle,
                             search,
@@ -31,6 +32,15 @@ export default function({
             <Button type="primary" onClick={shuffle} style={{ margin: '5px' }}>
                 Shuffle
             </Button>
+            <div id="selectEndpointGallery"
+                style={{ maxWidth: '250px' }}>
+                <Form.Label className="selectEndpointLabel">Select endpoint</Form.Label>
+                <Form.Control as="select" className="selectEndpointInput">
+                    <option>Dandelion APIs [PEACE]</option>
+                    <option>Ada Booster SP [BOOST]</option>
+                    <option>Lift SP [LIFT]</option>
+                </Form.Control>
+            </div>
         </div>
     )
 }
