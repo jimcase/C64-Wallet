@@ -10,7 +10,7 @@ import Sidebar from "../components/Sidebar";
 // core components
 
 
-class About extends React.Component {
+class Wallet extends React.Component {
 
     constructor(props) {
         super(props);
@@ -56,7 +56,7 @@ class About extends React.Component {
                             </div>
                             <div className='content'>
                                 <div className="main">
-                                    <p> About the project</p>
+                                    <p> About the wallet</p>
                                 </div>
                             </div>
                         </div>
@@ -69,4 +69,4 @@ class About extends React.Component {
     }
 }
 
-export default About;
+export default Wallet;

@@ -40,6 +40,12 @@ class Sidebar extends React.Component {
                         </div>
                         <div id="leftMenu" className=''>
                             <div className='sidebarLink'>
+                                <a href='/wallet'>
+                                    <FaIcons.FaUserSecret className="sidebarIcons"/>
+                                    Wallet
+                                </a>
+                            </div>
+                            <div className='sidebarLink'>
                                 <a href='/'>
                                     <FaIcons.FaHome className="sidebarIcons"/>
                                     NFTs Minter

@@ -5,6 +5,7 @@ import Minter from "./views/Minter";
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Gallery from "./views/Gallery";
 import About from "./views/About";
+import Wallet from "./views/Wallet";
 
 const App = () => {
     const [successText, setSuccessText] = useState(null);
@@ -19,6 +20,7 @@ const App = () => {
         <Router>
             <Switch>
                 <Route path='/' exact component={Minter}/>
+                <Route path='/wallet' exact component={Wallet}/>
                 <Route path='/gallery' exact component={Gallery}/>
                 <Route path='/about' exact component={About}/>
             </Switch>
