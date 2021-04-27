@@ -54,8 +54,10 @@ class Sidebar extends React.Component {
                             </div>
 
                             <div className='sidebarLink'>
-                                <FaIcons.FaInfo className="sidebarIcons"/>
-                                About
+                                <a href='/about'>
+                                    <FaIcons.FaInfo className="sidebarIcons"/>
+                                    About
+                                </a>
                             </div>
 
                         </div>
