@@ -230,7 +230,7 @@ class Minter extends React.Component {
                             <div className={`sidebar ${leftOpen}`} >
                                 <div className='header'>
                                     <h3 id='sidebarTitle'>
-                                        C64
+                                        _
                                     </h3>
                                 </div>
                                 <div id="leftMenu" className=''>
@@ -264,7 +264,7 @@ class Minter extends React.Component {
                       ${'left-' + leftOpen}
                      
                   `}>
-                                    Main header
+                                    C64 Minter
                                 </h3>
                             </div>
                             <div className='content'>

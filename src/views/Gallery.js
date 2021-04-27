@@ -7,6 +7,7 @@ import data from './../data/data-gallery'
 import Header from './GalleryHeader'
 import { Grid, Slug, Fade } from 'mauerwerk'
 import Sidebar from "../components/Sidebar";
+import * as FaIcons from "react-icons/fa";
 // core components
 
 
@@ -86,7 +87,40 @@ class Gallery extends React.Component {
 
                     <div id='layout'>
 
-                        <Sidebar leftOpen={leftOpen}/>
+                        <div id='left' className={leftOpen} >
+                            <div className='icon'
+                                 onClick={this.toggleSidebar} >
+                                &equiv;
+                            </div>
+                            <div className={`sidebar ${leftOpen}`} >
+                                <div className='header'>
+                                    <h3 id='sidebarTitle'>
+                                        _
+                                    </h3>
+                                </div>
+                                <div id="leftMenu" className=''>
+                                    <div className='sidebarLink'>
+                                        <a href='/'>
+                                            <FaIcons.FaHome className="sidebarIcons"/>
+                                            NFTs Minter
+                                        </a>
+                                    </div>
+
+                                    <div className='sidebarLink'>
+                                        <a href='/gallery'>
+                                            <FaIcons.FaImages className="sidebarIcons"/>
+                                            Gallery
+                                        </a>
+                                    </div>
+
+                                    <div className='sidebarLink'>
+                                        <FaIcons.FaInfo className="sidebarIcons"/>
+                                        About
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
 
                         <div id='main'>
                             <div className='header'>
@@ -95,7 +129,7 @@ class Gallery extends React.Component {
                       ${'left-' + leftOpen}
                      
                   `}>
-                                    Main header
+                                    C64 Minter
                                 </h3>
                             </div>
                             <div className='content'>

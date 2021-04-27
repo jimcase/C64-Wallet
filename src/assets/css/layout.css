@@ -1,4 +1,11 @@
 
+html, body{
+    background-color: #FFFACD;
+}
+
+.left{
+    background-color: #FFFACD;
+}
 #imgPreviewContainer{
     margin-top: 1rem;
 }
