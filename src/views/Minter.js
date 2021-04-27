@@ -9,6 +9,7 @@ import "../assets/scss/layout.scss";
 import "../assets/css/layout.css";
 
 import * as FaIcons from "react-icons/fa"
+import Magnifier from 'react-magnifier';
 
 import {faHammer, faInfoCircle, faPuzzlePiece} from "@fortawesome/free-solid-svg-icons";
 import {faUnsplash} from "@fortawesome/free-brands-svg-icons";
@@ -270,7 +271,8 @@ class Minter extends React.Component {
                                                                 </div>
                                                             </Col>
                                                             <Col sm={6}>
-                                                                <Img className={"imgPreview"} src={this.state.joinedBase64} fluid />
+                                                                <Magnifier className={"imgPreview"}  src={this.state.joinedBase64} />
+
                                                             </Col>
                                                         </Row>
 
