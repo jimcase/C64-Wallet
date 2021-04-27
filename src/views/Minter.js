@@ -75,11 +75,8 @@ class Minter extends React.Component {
         let numChunks = 1;
         for(let i=0; i<base64Array.length; i++){
             base64 = base64.concat(base64Array[i]);
-            //console.log(i+" Lengh: "+base64Array[i].length);
-            //console.log(i+": "+base64Array[i]);
             numChunks++;
         }
-        //console.log("base64Array: "+base64Array.length);
         this.setState({
             joinedBase64: base64,
             numChunks: numChunks
@@ -133,6 +130,8 @@ class Minter extends React.Component {
         });
         let file = event.target.files[0];
 
+
+
         this.setState({
             file: URL.createObjectURL(file),
             fileSource: event.target.files[0]
@@ -142,7 +141,8 @@ class Minter extends React.Component {
             this.readFileDataAsBase64(file).then(r =>{
                 this.setState({
                     base64: r,
-                    base64Size: (r.length * (3/4)) - 2
+                    base64Size: (r.length * (3/4)) - 2,
+
                 }, () => {
                     this.setState({
                         showLoading: false
@@ -153,6 +153,9 @@ class Minter extends React.Component {
             });
         });
     }
+
+
+
 
     readFileDataAsBase64(f) {
         const file = f;
@@ -208,7 +211,6 @@ class Minter extends React.Component {
         if (c){
             this.canvasContext = c.getContext('2d');
         }
-
     }
 
     render() {
