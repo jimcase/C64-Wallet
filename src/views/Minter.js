@@ -3,20 +3,19 @@ import React from "react";
 import {Button, Col, Container, Image as Img, Nav, Row, Tab, Form} from 'react-bootstrap';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Link} from 'react-router-dom';
+import Magnifier from 'react-magnifier';
 
 
 import "../assets/scss/layout.scss";
 import "../assets/css/layout.css";
 
 import * as FaIcons from "react-icons/fa"
-import Magnifier from 'react-magnifier';
 
 import {faHammer, faInfoCircle, faPuzzlePiece} from "@fortawesome/free-solid-svg-icons";
 import {faUnsplash} from "@fortawesome/free-brands-svg-icons";
 
 import {api} from "../api";
 import MintCart from "../components/MintCart";
-import Sidebar from "../components/Sidebar";
 
 // core components
 
@@ -223,9 +222,40 @@ class Minter extends React.Component {
 
                     <div id='layout'>
 
+                        <div id='left' className={leftOpen} >
+                            <div className='icon'
+                                 onClick={this.toggleSidebar} >
+                                &equiv;
+                            </div>
+                            <div className={`sidebar ${leftOpen}`} >
+                                <div className='header'>
+                                    <h3 id='sidebarTitle'>
+                                        C64
+                                    </h3>
+                                </div>
+                                <div id="leftMenu" className=''>
+                                    <div className='sidebarLink'>
+                                        <a href='/'>
+                                            <FaIcons.FaHome className="sidebarIcons"/>
+                                            NFTs Minter
+                                        </a>
+                                    </div>
 
-                        <Sidebar leftOpen={leftOpen}/>
+                                    <div className='sidebarLink'>
+                                        <a href='/gallery'>
+                                            <FaIcons.FaImages className="sidebarIcons"/>
+                                            Gallery
+                                        </a>
+                                    </div>
 
+                                    <div className='sidebarLink'>
+                                        <FaIcons.FaInfo className="sidebarIcons"/>
+                                        About
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
 
                         <div id='main'>
                             <div className='header'>
@@ -271,8 +301,8 @@ class Minter extends React.Component {
                                                                 </div>
                                                             </Col>
                                                             <Col sm={6}>
-                                                                <Magnifier className={"imgPreview"}  src={this.state.joinedBase64} />
 
+                                                                <Magnifier src={this.state.joinedBase64} />
                                                             </Col>
                                                         </Row>
 
