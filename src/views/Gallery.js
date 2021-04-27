@@ -4,6 +4,7 @@ import { render } from 'react-dom'
 import "../assets/css/gallery.css"
 import lodash from 'lodash'
 import data from './../data/data-gallery'
+import endpoints from './../data/endpoints/endpoints'
 import Header from './GalleryHeader'
 import { Grid, Slug, Fade } from 'mauerwerk'
 import Sidebar from "../components/Sidebar";
@@ -13,7 +14,7 @@ import Moment from 'moment';
 // core components
 const moment = extendMoment(Moment);
 
-const Cell = ({ toggle, name, height, description, css, maximized }) => (
+const NFT = ({ toggle, name, height, description, css, maximized }) => (
     <div
         className="cell"
         style={{ backgroundImage: css, cursor: !maximized ? 'pointer' : 'auto' }}
@@ -55,12 +56,17 @@ class Gallery extends React.Component {
             metatx: '721',
             height: true,
 
+            selectedEndPoint: 0,
+            epoch:[],
+
             metadataRequest: {
                 metadataKey: "",
                 metadataStartDate: moment().utc().subtract(1, 'day').format('DD-MM-YY'),
                 metadataEndDate: moment().utc().format('DD-MM-YY'),
                 metadataObjects: []
             },
+            metadataResponse: [],   // from limit request
+            metadataObjects: []
         };
 
     }
@@ -102,6 +108,24 @@ class Gallery extends React.Component {
     }
 
     // From dbooster.io/calendar
+    async getLastEpoch(epochN) {
+
+        const requestOptions = {
+            method: 'GET',
+            headers: {'Content-Type': 'application/json'}
+        };
+
+        await fetch('https://cardano-db-sync-mainnet.api.dbooster.io/epoch&limit=1', requestOptions)
+            .then(response => response.text())
+            .then(epoch =>
+                this.setState({
+                    currentEpoch: JSON.parse(epoch)
+                }, () => {
+                })
+            )
+    }
+
+    // From dbooster.io/calendar
     async getAllEpochs() {
         const requestOptions = {
             method: 'GET',
@@ -111,6 +135,18 @@ class Gallery extends React.Component {
             .then(response => response.text())
             .then(data => {
                 this.setState({epochs: JSON.parse(data)});
+            }).then(e => null);
+    }
+
+    async getMetadataByLimit(key,limit) {
+        const requestOptions = {
+            method: 'GET',
+            headers: {'Content-Type': 'application/json'}
+        };
+        fetch('https://postgrest-api.mainnet.dandelion.link/tx_metadata?key=eq.'+key+'&limit='+limit, requestOptions)
+            .then(response => response.text())
+            .then(data => {
+                this.setState({metadataResponse: JSON.parse(data)});
             }).then(e => null);
     }
 
@@ -237,7 +273,7 @@ class Gallery extends React.Component {
                                         // Delay when active elements (blown up) are minimized again
                                         closeDelay={400}>
                                         {(data, maximized, toggle) => (
-                                            <Cell {...data} maximized={maximized} toggle={toggle} />
+                                            <NFT {...data} maximized={maximized} toggle={toggle} />
                                         )}
                                     </Grid>
                                 </div>
