@@ -15,6 +15,7 @@ import {faUnsplash} from "@fortawesome/free-brands-svg-icons";
 
 import {api} from "../api";
 import MintCart from "../components/MintCart";
+import Sidebar from "../components/Sidebar";
 
 // core components
 
@@ -221,40 +222,9 @@ class Minter extends React.Component {
 
                     <div id='layout'>
 
-                        <div id='left' className={leftOpen} >
-                            <div className='icon'
-                                 onClick={this.toggleSidebar} >
-                                &equiv;
-                            </div>
-                            <div className={`sidebar ${leftOpen}`} >
-                                <div className='header'>
-                                    <h3 id='sidebarTitle'>
-                                        C64
-                                    </h3>
-                                </div>
-                                <div id="leftMenu" className=''>
-                                    <div className='sidebarLink'>
-                                        <a href='/'>
-                                            <FaIcons.FaHome className="sidebarIcons"/>
-                                            NFTs Minter
-                                        </a>
-                                    </div>
 
-                                    <div className='sidebarLink'>
-                                        <a href='/gallery'>
-                                            <FaIcons.FaImages className="sidebarIcons"/>
-                                            Gallery
-                                        </a>
-                                    </div>
+                        <Sidebar leftOpen={leftOpen}/>
 
-                                    <div className='sidebarLink'>
-                                        <FaIcons.FaInfo className="sidebarIcons"/>
-                                        About
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
 
                         <div id='main'>
                             <div className='header'>

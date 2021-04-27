@@ -6,6 +6,7 @@ import lodash from 'lodash'
 import data from './../data/data-gallery'
 import Header from './GalleryHeader'
 import { Grid, Slug, Fade } from 'mauerwerk'
+import Sidebar from "../components/Sidebar";
 // core components
 
 
@@ -85,34 +86,7 @@ class Gallery extends React.Component {
 
                     <div id='layout'>
 
-                        <div id='left' className={leftOpen} >
-                            <div className='icon'
-                                 onClick={this.toggleSidebar} >
-                                &equiv;
-                            </div>
-                            <div className={`sidebar ${leftOpen}`} >
-                                <div className='header'>
-                                    <h3 className='title'>
-                                        C64 Minter
-                                    </h3>
-                                </div>
-                                <div className='content'>
-                                    <h3>Sidebar</h3>
-                                    <ul>
-                                        <li>
-                                            <a href='/'>NFTs Minter</a>
-                                        </li>
-                                        <li>
-                                            <a href='/gallery'>Gallery</a>
-
-                                        </li>
-                                        <li>
-                                            About
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                        <Sidebar leftOpen={leftOpen}/>
 
                         <div id='main'>
                             <div className='header'>
