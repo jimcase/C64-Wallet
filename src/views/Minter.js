@@ -229,9 +229,7 @@ class Minter extends React.Component {
                             </div>
                             <div className={`sidebar ${leftOpen}`} >
                                 <div className='header'>
-                                    <h3 id='sidebarTitle'>
-                                        C64
-                                    </h3>
+
                                 </div>
                                 <div id="leftMenu" className=''>
                                     <div className='sidebarLink'>

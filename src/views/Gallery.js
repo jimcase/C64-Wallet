@@ -8,8 +8,10 @@ import Header from './GalleryHeader'
 import { Grid, Slug, Fade } from 'mauerwerk'
 import Sidebar from "../components/Sidebar";
 import * as FaIcons from "react-icons/fa";
+import {extendMoment} from 'moment-range';
+import Moment from 'moment';
 // core components
-
+const moment = extendMoment(Moment);
 
 const Cell = ({ toggle, name, height, description, css, maximized }) => (
     <div
@@ -51,7 +53,14 @@ class Gallery extends React.Component {
             margin: 70,
             filter: '',
             metatx: '721',
-            height: true
+            height: true,
+
+            metadataRequest: {
+                metadataKey: "",
+                metadataStartDate: moment().utc().subtract(1, 'day').format('DD-MM-YY'),
+                metadataEndDate: moment().utc().format('DD-MM-YY'),
+                metadataObjects: []
+            },
         };
 
     }
@@ -74,6 +83,76 @@ class Gallery extends React.Component {
         this.setState({ [key]: !this.state[key] });
     }
 
+    // From dbooster.io/calendar
+    async getEpoch(epochN) {
+
+        const requestOptions = {
+            method: 'GET',
+            headers: {'Content-Type': 'application/json'}
+        };
+
+        await fetch('https://cardano-db-sync-mainnet.api.dbooster.io/epoch?no=eq.' + epochN, requestOptions)
+            .then(response => response.text())
+            .then(epoch =>
+                this.setState({
+                    currentEpoch: JSON.parse(epoch)[0]
+                }, () => {
+                })
+            )
+    }
+
+    // From dbooster.io/calendar
+    async getAllEpochs() {
+        const requestOptions = {
+            method: 'GET',
+            headers: {'Content-Type': 'application/json'}
+        };
+        fetch('https://cardano-db-sync-mainnet.api.dbooster.io/epoch', requestOptions)
+            .then(response => response.text())
+            .then(data => {
+                this.setState({epochs: JSON.parse(data)});
+            }).then(e => null);
+    }
+
+    async getMetadata() {
+
+        if (this.state.metadataKey
+            && moment(this.state.metadataRequest.metadataStartDate).isValid()
+            && moment(this.state.metadataRequest.metadataEndDate).isValid()
+            && moment(this.state.metadataRequest.metadataStartDate).isBefore(moment(this.state.metadataRequest.metadataEndDate))
+        ) {
+
+            let key = this.state.metadataRequest.metadataKey;
+            let start_time = moment(this.state.metadataRequest.metadataStartDate, 'DD-MM-YY').format('YYYY-MM-DD') + ''; // TODO ?? should be: .format('YYYY-MM-DD'
+            let end_time = moment(this.state.metadataRequest.metadataEndDate, 'DD-MM-YY').format('YYYY-MM-DD');
+
+            const requestOptions2 = {
+                method: 'POST',
+                credentials: 'same-origin',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({"key": key, "start_time": start_time, "end_time": end_time})
+            }
+
+            fetch('https://api.dbooster.io/cardano/metadata', requestOptions2)
+                .then(response => response.text())
+                .then(data => {
+
+                    let metaFiltered = JSON.parse(data).filter(meta => Date.parse(meta.block_time) > (Date.parse(start_time)));
+
+                    this.setState({
+                        metadataObjects: metaFiltered
+                    }, () => {
+
+                    })
+                })
+                .catch(error => {
+                    console.log("error: " + error);
+                });
+        }
+    }
+
     render() {
         const data = this.state.data.filter(
             d => d.name.toLowerCase().indexOf(this.state.filter) !== -1
@@ -94,9 +173,7 @@ class Gallery extends React.Component {
                             </div>
                             <div className={`sidebar ${leftOpen}`} >
                                 <div className='header'>
-                                    <h3 id='sidebarTitle'>
-                                        C64
-                                    </h3>
+
                                 </div>
                                 <div id="leftMenu" className=''>
                                     <div className='sidebarLink'>
