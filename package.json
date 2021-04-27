@@ -40,6 +40,7 @@
     "@fortawesome/react-fontawesome": "^0.1.14",
     "app-module-path": "^2.2.0",
     "axios": "^0.21.1",
+    "bourbon": "^7.0.0",
     "cors": "^2.8.5",
     "electron-is-dev": "^1.1.0",
     "electron-squirrel-startup": "^1.0.0",

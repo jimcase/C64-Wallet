@@ -14,6 +14,7 @@ import {faHammer, faInfoCircle, faPuzzlePiece} from "@fortawesome/free-solid-svg
 import {faUnsplash} from "@fortawesome/free-brands-svg-icons";
 
 import {api} from "../api";
+import MintCart from "../components/MintCart";
 
 // core components
 
@@ -279,10 +280,7 @@ class Minter extends React.Component {
                                                     <div id="imgPreviewContainer">
                                                         <Row>
                                                             <Col sm={6}>
-                                                                <h5>Tmp file: </h5>
-                                                                <pre>{this.state.file}</pre>
                                                                 <h5>Base64</h5>
-                                                                <p>Joined base64</p>
                                                                 <pre>{this.state.base64}</pre>
                                                                 <h5>Size</h5>
                                                                 <p>{this.state.base64Size} bytes</p>
@@ -301,15 +299,19 @@ class Minter extends React.Component {
                                                 ) : null}
 
 
-                                                <p>Estimated cost: _₳</p>
-                                                <Button variant="secondary" size="lg" block onClick={() => this.handleAsset()}>
-                                                    Mint NFT
-                                                </Button>
+                                                <Row>
+                                                    <Col>
+                                                        <MintCart/>
+                                                    </Col>
+
+                                                </Row>
+
 
                                             </Col>
 
 
                                         </Row>
+
                                     </div>
                                 ) : null}
                                 </Container>
