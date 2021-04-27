@@ -6,7 +6,6 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Gallery from "./views/Gallery";
 import About from "./views/About";
 import Wallet from "./views/Wallet";
-import Gallery2 from "./views/Gallery2";
 
 const App = () => {
     const [successText, setSuccessText] = useState(null);
