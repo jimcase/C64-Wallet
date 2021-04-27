@@ -1,6 +1,7 @@
 import React from "react";
 import {Button, Col, Form, Image, Row} from "react-bootstrap";
 import "../assets/scss/mintCart.scss"
+import endpoints from "../data/endpoints/endpoints";
 // core components
 
 class MintCart extends React.Component {
@@ -9,12 +10,34 @@ class MintCart extends React.Component {
         super(props);
 
         this.state = {
-
+            selectedEndpoint: endpoints[0]
         };
 
     }
 
+    // TODO adapt function to mint assets
+    async mintNFT(key,limit) {
+        const requestOptions = {
+            method: 'GET',
+            headers: {'Content-Type': 'application/json'}
+        };
+        // TODO change endpoint
+        fetch('https://'+this.state.selectedEndPoint.testnet+'/tx_metadata?key=eq.'+key+'&limit='+limit, requestOptions)
+            .then(response => response.text())
+            .then(data => {
+                this.setState({metadataResponse: JSON.parse(data)});
+            }).then(e => null);
+    }
 
+    handleSelectedEndpoint(ticker){
+        let endp = endpoints.filter(e => e.ticker === ticker);
+
+        this.setState({
+            selectedEndPoint: endp[0]
+        }, () => {
+            alert(this.state.selectedEndPoint.mainnet);
+        });
+    }
     async componentDidMount() {
     }
 
@@ -26,47 +49,47 @@ class MintCart extends React.Component {
         return (
             <>
                 <div className="invoice">
-                    <div class="wrap cf">
-                        <h1 class="projTitle">Minting Cart</h1>
+                    <div className="wrap cf">
+                        <h1 className="projTitle">Minting Cart</h1>
 
-                        <div class="cart">
+                        <div className="cart">
 
-                            <ul class="cartWrap">
-                                <li class="items odd">
+                            <ul className="cartWrap">
+                                <li className="items odd">
 
-                                    <div class="infoWrap">
-                                        <div class="cartSection">
-                                            <img src="http://lorempixel.com/output/technics-q-c-300-300-4.jpg" alt="" class="itemImg" />
-                                            <p class="itemNumber">#QUE-007544-002</p>
+                                    <div className="infoWrap">
+                                        <div className="cartSection">
+                                            <img src="http://lorempixel.com/output/technics-q-c-300-300-4.jpg" alt="" className="itemImg" />
+                                            <p className="itemNumber">#QUE-007544-002</p>
                                             <h3>Metadata tx 16kb</h3>
 
-                                            <p> <input type="text"  class="qty" disabled placeholder="3"/> x ₳5.00</p>
+                                            <p> <input type="text"  className="qty" disabled placeholder="3"/> x ₳5.00</p>
 
-                                            <p class="stockStatus"> 100% on-chain</p>
+                                            <p className="stockStatus"> 100% on-chain</p>
                                         </div>
 
 
-                                        <div class="prodTotal cartSection">
+                                        <div className="prodTotal cartSection">
                                             <p>₳15.00</p>
                                         </div>
                                     </div>
                                 </li>
-                                <li class="items even">
+                                <li className="items even">
 
-                                    <div class="infoWrap">
-                                        <div class="cartSection">
+                                    <div className="infoWrap">
+                                        <div className="cartSection">
 
-                                            <img src="http://lorempixel.com/output/technics-q-c-300-300-4.jpg" alt="" class="itemImg" />
-                                            <p class="itemNumber">#QUE-007544-002</p>
+                                            <img src="http://lorempixel.com/output/technics-q-c-300-300-4.jpg" alt="" className="itemImg" />
+                                            <p className="itemNumber">#QUE-007544-002</p>
                                             <h3>Metadata tx 3.2kb</h3>
 
-                                            <p> <input type="text"  class="qty" placeholder="1" disabled/> x ₳5.00</p>
+                                            <p> <input type="text"  className="qty" placeholder="1" disabled/> x ₳5.00</p>
 
-                                            <p class="stockStatus"> 100% on-chain</p>
+                                            <p className="stockStatus"> 100% on-chain</p>
                                         </div>
 
 
-                                        <div class="prodTotal cartSection">
+                                        <div className="prodTotal cartSection">
                                             <p>₳5.00</p>
                                         </div>
 
@@ -77,11 +100,10 @@ class MintCart extends React.Component {
                             </ul>
                         </div>
 
-                        <Form.Label>Select endpoint</Form.Label>
-                        <Form.Control as="select">
-                            <option>Dandelion APIs [PEACE]</option>
-                            <option>Ada Booster SP [BOOST]</option>
-                            <option>Lift SP [LIFT]</option>
+                        <Form.Label className="selectEndpointLabel">Select endpoint</Form.Label>
+                        <Form.Control as="select" className="selectEndpointInput" onChange={ e => this.handleSelectedEndpoint(e.target.value)}>
+                            <option  value="PEACE">Dandelion APIs [PEACE]</option>
+                            <option  value="BOOST">Ada Booster SP [BOOST]</option>
                         </Form.Control>
                         <Button variant="secondary" size="lg" block onClick={null}>
                             Mint NFT

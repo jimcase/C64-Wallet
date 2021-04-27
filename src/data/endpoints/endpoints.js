@@ -5,7 +5,7 @@ export default [
         mainnet: 'postgrest-api.mainnet.dandelion.link',
         testnet: 'postgrest-api.testnet.dandelion.link',
         token: '',
-        pool: 'PEACE'
+        ticker: 'PEACE'
     },
     {
         id: 1,
@@ -13,6 +13,6 @@ export default [
         mainnet: 'cardano-db-sync-mainnet.api.dbooster.io',
         testnet: '',
         token: '',
-        pool: 'BOOST'
+        ticker: 'BOOST'
     }
 ]

@@ -1,48 +1,53 @@
-import React from 'react'
-import { Button, Input, Dropdown, Menu, Switch } from 'antd'
-import * as FaIcons from "react-icons/fa"
+import {Button, Input, Switch} from "antd";
+import * as FaIcons from "react-icons/fa";
 import {Form} from "react-bootstrap";
-export default function({
-                            shuffle,
-                            search,
-                            metatx,
-                            setEndpoint,
-                            setMargin,
-                            setHeight,
-                            columns,
-                            margin
-                        }) {
-    return (
-        <div className="header">
+import React from "react";
 
-            <Input
-                style={{ marginLeft: 15, minWidth: 50, maxWidth: 50 }}
-                placeholder="721"
-                onChange={metatx}
-            />
+class GalleryHeader extends React.Component{
+    constructor(props){
+        super(props);
+        this.state={
+            text:''
+        }
+        this.passingEndpointProps = this.passingEndpointProps.bind(this);
+    }
+    passingEndpointProps(value){
+        this.setState({ text: value }, () => {
+            this.props.getEndpoint(this.state.text);
+        })
+    }
 
-            <Input
-                style={{ marginLeft: 15, minWidth: 130, maxWidth: 300 }}
-                suffix={<FaIcons.FaSearch className="sidebarIcons" style={{ color: 'rgba(0,0,0,.25)' }}/>}
-                placeholder="input search policy"
-                onChange={search}
-            />
+    render(){
+        return(
+            <div className="header">
 
-            <span style={{ marginLeft: 15 }}>Individual height</span>
-            <Switch style={{ marginLeft: 15 }} defaultChecked onChange={setHeight} />
-            <Button type="primary" onClick={shuffle} style={{ margin: '5px' }}>
-                Shuffle
-            </Button>
-            <div id="selectEndpointGallery"
-                style={{ maxWidth: '250px' }}>
-                <Form.Label className="selectEndpointLabel">Select endpoint</Form.Label>
-                <Form.Control as="select" className="selectEndpointInput" onChange={setEndpoint} trigger={['click']}>
-                    <option  value="PEACE">Dandelion APIs [PEACE]</option>
-                    <option  value="BOOST">Ada Booster SP [BOOST]</option>
-                    <option  value="LIFT">Lift SP [LIFT]</option>
-                </Form.Control>
+                <Input
+                    style={{ marginLeft: 15, minWidth: 50, maxWidth: 50 }}
+                    placeholder="721"
+                    onChange={null}
+                />
+
+                <Input
+                    style={{ marginLeft: 15, minWidth: 130, maxWidth: 300 }}
+                    placeholder="input search policy"
+                    onChange={null}
+                />
+
+
+                <div id="selectEndpointGallery"
+                     style={{ maxWidth: '250px' }}>
+                    <Form.Control as="select" className="selectEndpointInput" onChange={ e => this.passingEndpointProps(e.target.value)}>
+                        <option  value="PEACE">Dandelion APIs [PEACE]</option>
+                        <option  value="BOOST">Ada Booster SP [BOOST]</option>
+                    </Form.Control>
+                </div>
+
+
             </div>
 
-        </div>
-    )
+        )
+    }
 }
+
+
+export default GalleryHeader;

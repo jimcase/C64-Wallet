@@ -5,13 +5,13 @@ import "../assets/css/gallery.css"
 import lodash from 'lodash'
 import data from './../data/data-gallery'
 import endpoints from './../data/endpoints/endpoints'
-import Header from './GalleryHeader'
+
 import { Grid, Slug, Fade } from 'mauerwerk'
 import Sidebar from "../components/Sidebar";
 import * as FaIcons from "react-icons/fa";
 import {extendMoment} from 'moment-range';
 import Moment from 'moment';
-import GalleryHeader2 from "./GalleryHeader2";
+import GalleryHeader from "./GalleryHeader";
 // core components
 const moment = extendMoment(Moment);
 
@@ -57,7 +57,7 @@ class Gallery extends React.Component {
             metatx: '721',
             height: true,
 
-            selectedEndPoint: 0,
+            selectedEndPoint: endpoints[0],
             epoch:[],
 
             metadataRequest: {
@@ -81,18 +81,6 @@ class Gallery extends React.Component {
     setMargin = e => this.setState({ margin: parseInt(e.key) });
     setHeight = e => this.setState({ height: e });
 
-
-    setEndpoint = (e) => {
-
-        let selectedEndpoint= e;    // sum 1 day to be currenty
-        console.log("form: "+e);
-
-        this.setState({
-            selectedEndPoint: e.value
-        }, () => {
-
-        });
-    }
     async componentDidMount() {
     }
 
@@ -112,7 +100,7 @@ class Gallery extends React.Component {
             headers: {'Content-Type': 'application/json'}
         };
 
-        await fetch('https://cardano-db-sync-mainnet.api.dbooster.io/epoch?no=eq.' + epochN, requestOptions)
+        await fetch('https://'+this.state.selectedEndPoint.testnet+'/epoch?no=eq.' + epochN, requestOptions)
             .then(response => response.text())
             .then(epoch =>
                 this.setState({
@@ -130,7 +118,7 @@ class Gallery extends React.Component {
             headers: {'Content-Type': 'application/json'}
         };
 
-        await fetch('https://cardano-db-sync-mainnet.api.dbooster.io/epoch&limit=1', requestOptions)
+        await fetch('https://'+this.state.selectedEndPoint.testnet+'/epoch&limit=1', requestOptions)
             .then(response => response.text())
             .then(epoch =>
                 this.setState({
@@ -146,7 +134,7 @@ class Gallery extends React.Component {
             method: 'GET',
             headers: {'Content-Type': 'application/json'}
         };
-        fetch('https://cardano-db-sync-mainnet.api.dbooster.io/epoch', requestOptions)
+        fetch('https://'+this.state.selectedEndPoint.testnet+'/epoch', requestOptions)
             .then(response => response.text())
             .then(data => {
                 this.setState({epochs: JSON.parse(data)});
@@ -158,7 +146,7 @@ class Gallery extends React.Component {
             method: 'GET',
             headers: {'Content-Type': 'application/json'}
         };
-        fetch('https://postgrest-api.mainnet.dandelion.link/tx_metadata?key=eq.'+key+'&limit='+limit, requestOptions)
+        fetch('https://'+this.state.selectedEndPoint.testnet+'/tx_metadata?key=eq.'+key+'&limit='+limit, requestOptions)
             .then(response => response.text())
             .then(data => {
                 this.setState({metadataResponse: JSON.parse(data)});
@@ -204,18 +192,14 @@ class Gallery extends React.Component {
         }
     }
 
-    getEndpointById(id){
-        return endpoints.filter(e => e.id === id);
-    }
+    handleSelectedEndpoint(ticker){
+        let endp = endpoints.filter(e => e.ticker === ticker);
 
-    handleSelectedEndpoint(x){
         this.setState({
-            selectedEndPoint: x
+            selectedEndPoint: endp[0]
         }, () => {
-            console.log(this.state.selectedEndPoint);
-            alert(this.state.selectedEndPoint);
+            alert(this.state.selectedEndPoint.mainnet);
         });
-
     }
 
     render() {
@@ -276,7 +260,7 @@ class Gallery extends React.Component {
                             </div>
                             <div className='content'>
                                 <div className="main">
-                                    <GalleryHeader2
+                                    <GalleryHeader
                                         {...this.state}
                                         metatx={this.metatx}
                                         search={this.search}
