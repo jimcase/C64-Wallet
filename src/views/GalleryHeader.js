@@ -6,7 +6,7 @@ export default function({
                             shuffle,
                             search,
                             metatx,
-                            setColumns,
+                            setEndpoint,
                             setMargin,
                             setHeight,
                             columns,
@@ -14,6 +14,7 @@ export default function({
                         }) {
     return (
         <div className="header">
+
             <Input
                 style={{ marginLeft: 15, minWidth: 50, maxWidth: 50 }}
                 placeholder="721"
@@ -35,12 +36,13 @@ export default function({
             <div id="selectEndpointGallery"
                 style={{ maxWidth: '250px' }}>
                 <Form.Label className="selectEndpointLabel">Select endpoint</Form.Label>
-                <Form.Control as="select" className="selectEndpointInput">
-                    <option>Dandelion APIs [PEACE]</option>
-                    <option>Ada Booster SP [BOOST]</option>
-                    <option>Lift SP [LIFT]</option>
+                <Form.Control as="select" className="selectEndpointInput" onChange={setEndpoint} trigger={['click']}>
+                    <option  value="PEACE">Dandelion APIs [PEACE]</option>
+                    <option  value="BOOST">Ada Booster SP [BOOST]</option>
+                    <option  value="LIFT">Lift SP [LIFT]</option>
                 </Form.Control>
             </div>
+
         </div>
     )
 }

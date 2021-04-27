@@ -11,6 +11,7 @@ import Sidebar from "../components/Sidebar";
 import * as FaIcons from "react-icons/fa";
 import {extendMoment} from 'moment-range';
 import Moment from 'moment';
+import GalleryHeader2 from "./GalleryHeader2";
 // core components
 const moment = extendMoment(Moment);
 
@@ -69,15 +70,29 @@ class Gallery extends React.Component {
             metadataObjects: []
         };
 
+        this.handleSelectedEndpoint = this.handleSelectedEndpoint.bind(this);
+
     }
 
-    metatx = e => this.setState({ filter: e.target.value })
-    search = e => this.setState({ filter: e.target.value })
-    shuffle = () => this.setState(state => ({ data: lodash.shuffle(state.data) }))
-    setColumns = e => this.setState({ columns: parseInt(e.key) })
-    setMargin = e => this.setState({ margin: parseInt(e.key) })
-    setHeight = e => this.setState({ height: e })
+    metatx = e => this.setState({ filter: e.target.value });
+    search = e => this.setState({ filter: e.target.value });
+    shuffle = () => this.setState(state => ({ data: lodash.shuffle(state.data) }));
+    setColumns = e => this.setState({ columns: parseInt(e.key) });
+    setMargin = e => this.setState({ margin: parseInt(e.key) });
+    setHeight = e => this.setState({ height: e });
 
+
+    setEndpoint = (e) => {
+
+        let selectedEndpoint= e;    // sum 1 day to be currenty
+        console.log("form: "+e);
+
+        this.setState({
+            selectedEndPoint: e.value
+        }, () => {
+
+        });
+    }
     async componentDidMount() {
     }
 
@@ -189,6 +204,20 @@ class Gallery extends React.Component {
         }
     }
 
+    getEndpointById(id){
+        return endpoints.filter(e => e.id === id);
+    }
+
+    handleSelectedEndpoint(x){
+        this.setState({
+            selectedEndPoint: x
+        }, () => {
+            console.log(this.state.selectedEndPoint);
+            alert(this.state.selectedEndPoint);
+        });
+
+    }
+
     render() {
         const data = this.state.data.filter(
             d => d.name.toLowerCase().indexOf(this.state.filter) !== -1
@@ -247,7 +276,7 @@ class Gallery extends React.Component {
                             </div>
                             <div className='content'>
                                 <div className="main">
-                                    <Header
+                                    <GalleryHeader2
                                         {...this.state}
                                         metatx={this.metatx}
                                         search={this.search}
@@ -255,6 +284,8 @@ class Gallery extends React.Component {
                                         setColumns={this.setColumns}
                                         setMargin={this.setMargin}
                                         setHeight={this.setHeight}
+
+                                        getEndpoint={this.handleSelectedEndpoint}
                                     />
                                     <Grid
                                         className="grid"
