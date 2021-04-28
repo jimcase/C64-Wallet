@@ -155,6 +155,7 @@ class Minter extends React.Component {
 
     buildHTTPMetadatasFromFile(customHeaders) {
 
+        //         const uri = "metadata+cardano://2065e342de1748dd69788f71e7816b61b0e93da942a87a5a334d6a9a3defdc2a?network=testnet&key=104116116112&type=http-response"
         const HTTP_RESPONSE_METADATUM = 104116116112;
 
         let metadataObj = {};
@@ -325,7 +326,7 @@ class Minter extends React.Component {
                                         </a>
                                     </div>
 
-                                    <div className='sidebarLink'>
+                                    <div className='sidebarLink infoButton'>
                                         <FaIcons.FaInfo className="sidebarIcons"/>
                                     </div>
 
@@ -336,7 +337,7 @@ class Minter extends React.Component {
                         <div id='main'>
                             <div className='header'>
                                 <h3 className={`
-                      title
+                      title  multiColorTitle
                       ${'left-' + leftOpen}
                      
                   `}>
@@ -369,9 +370,10 @@ class Minter extends React.Component {
                                                                 <div>
                                                                     <h3>PGP Sign</h3>
                                                                     <Form.Label id="identitySelector"
-                                                                                className="blackText">Select
-                                                                        identity</Form.Label>
+                                                                                className="whiteText">
+                                                                        Select identity</Form.Label>
                                                                     <Form.Control as="select">
+                                                                        <option>Not signed</option>
                                                                         <option>artist@nftify.io</option>
                                                                         <option>personal@gmail.com</option>
                                                                         <option>Atala Prism</option>

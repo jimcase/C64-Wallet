@@ -264,7 +264,7 @@ class Gallery extends React.Component {
                                         </a>
                                     </div>
 
-                                    <div className='sidebarLink'>
+                                    <div className='sidebarLink infoButton'>
                                         <FaIcons.FaInfo className="sidebarIcons"/>
                                     </div>
 
@@ -275,7 +275,7 @@ class Gallery extends React.Component {
                         <div id='main'>
                             <div className='header'>
                                 <h3 className={`
-                      title
+                      title multiColorTitle
                       ${'left-' + leftOpen}
                      
                   `}>

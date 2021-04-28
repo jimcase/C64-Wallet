@@ -1,5 +1,4 @@
-import {Button, Input, Switch} from "antd";
-import * as FaIcons from "react-icons/fa";
+import {Input} from "antd";
 import {Form} from "react-bootstrap";
 import React from "react";
 
@@ -36,9 +35,10 @@ class GalleryHeader extends React.Component{
 
                 <div id="selectEndpointGallery"
                      style={{ maxWidth: '250px' }}>
-                    <Form.Control as="select" className="selectEndpointInput" onChange={ e => this.passingEndpointProps(e.target.value)}>
-                        <option  value="PEACE">Dandelion APIs [PEACE]</option>
-                        <option  value="BOOST">Ada Booster SP [BOOST]</option>
+                    <Form.Control as="select" className="blackText"
+                                  onChange={e => this.passingEndpointProps(e.target.value)}>
+                        <option value="PEACE">Dandelion APIs [PEACE]</option>
+                        <option value="BOOST">Ada Booster SP [BOOST]</option>
                     </Form.Control>
                 </div>
 

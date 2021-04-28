@@ -8,16 +8,23 @@ html, body {
 
 }
 
+#selectEndpointGallery select option {
+    margin: 40px;
+    background: rgba(0, 0, 0, 0.3) !important;
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+}
+
 .title {
     font-family: myFirstFont;
     font-size: 35px;
 }
 
-.blackText * {
+.blackText {
     color: black !important;
 }
 
-.whiteText * {
+.whiteText {
     color: white !important;
 }
 
@@ -62,12 +69,30 @@ canvas#viewport {
 .sidebarIcons {
     font-size: 60px;
     margin: 20px;
+    color: white;
+}
+
+.multiColorTitle {
+    background-image: linear-gradient(to left, #DD6168, #ffae19, #e6e600, #198c19, #3883CD, orange, red);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.onChain {
+    color: #38cd38 !important;
+}
+
+.signedTx {
+    color: #38cdcd !important;
 }
 
 #identitySelector * {
     color: black !important;
     background-color: #333333;
 }
+
 @media only screen and (max-width: 600px) {
 
 }

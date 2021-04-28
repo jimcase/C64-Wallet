@@ -63,18 +63,21 @@ class MintCart extends React.Component {
                                     <div className="infoWrap">
                                         <div className="cartSection">
                                             <img src={this.props.image} alt="" className="itemImg"/>
-                                            <p className="itemNumber">#QUE-007544-002</p>
+                                            <p className="itemNumber whiteText">#QUE-007544-002</p>
                                             <h3>Metadata tx 16kb</h3>
 
-                                            <p><input type="text" className="qty" disabled
-                                                      placeholder={"" + this.props.nChunks - 1 + ""}/> x ₳5.00</p>
+                                            <p className="whiteText"><input type="text" className="qty whiteText"
+                                                                            disabled
+                                                                            placeholder={"" + this.props.nChunks - 1 + ""}/> x
+                                                ₳5.00</p>
 
-                                            <p className="stockStatus"> 100% on-chain</p>
+                                            <p className="stockStatus whiteText onChain"> 100% on-chain</p>
+                                            <p className="stockStatus whiteText signedTx"> signed</p>
                                         </div>
 
 
                                         <div className="prodTotal cartSection">
-                                            <p>₳15.00</p>
+                                            <p className="whiteText">₳15.00</p>
                                         </div>
                                     </div>
                                 </li>
@@ -84,17 +87,19 @@ class MintCart extends React.Component {
                                         <div className="cartSection">
 
                                             <img src={this.props.image} alt="" className="itemImg"/>
-                                            <p className="itemNumber">#QUE-007544-002</p>
+                                            <p className="itemNumber whiteText">#QUE-007544-002</p>
                                             <h3>Metadata tx 3.2kb</h3>
 
-                                            <p><input type="text" className="qty" placeholder="1" disabled/> x ₳1.00</p>
+                                            <p className="whiteText"><input type="text" className="qty whiteText"
+                                                                            placeholder="1" disabled/> x ₳1.00</p>
 
-                                            <p className="stockStatus"> 100% on-chain</p>
+                                            <p className="stockStatus whiteText onChain"> 100% on-chain</p>
+                                            <p className="stockStatus whiteText signedTx"> signed</p>
                                         </div>
 
 
                                         <div className="prodTotal cartSection">
-                                            <p>₳1.00</p>
+                                            <p className="whiteText">₳1.00</p>
                                         </div>
 
                                     </div>
