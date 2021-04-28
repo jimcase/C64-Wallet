@@ -69,15 +69,17 @@ canvas#viewport {
     width: 900px;
 }
 
-#leftMenu ul{
+#leftMenu ul {
     list-style-type: none;
 }
-#leftMenu ul li{
+
+#leftMenu ul li {
     margin: 5px;
 }
-#leftMenu ul li a{
+
+#leftMenu ul li a {
     color: inherit;
-    text-decoration:none;
+    text-decoration: none;
 }
 
 #sidebarTitle {
