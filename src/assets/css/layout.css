@@ -1,18 +1,42 @@
-
-html, body{
-    background-color: #FFFACD;
+@font-face {
+    font-family: myFirstFont;
+    src: url("../commodore_64/Commodore-Angled-v1.2.ttf");
 }
 
-.left{
-    background-color: #FFFACD;
+html, body {
+    background-color: #005555;
+
 }
-#imgPreviewContainer{
+
+.title {
+    font-family: myFirstFont;
+    font-size: 35px;
+}
+
+.blackText * {
+    color: black !important;
+}
+
+.whiteText * {
+    color: white !important;
+}
+
+.left {
+    background-color: #005555;
+}
+
+#imgPreviewContainer {
     margin-top: 1rem;
 }
-.imgPreview{
+
+.imgPreview {
 
 }
-canvas#viewport { border: 1px solid white; width: 900px; }
+
+canvas#viewport {
+    border: 1px solid white;
+    width: 900px;
+}
 
 #leftMenu ul{
     list-style-type: none;
@@ -24,18 +48,25 @@ canvas#viewport { border: 1px solid white; width: 900px; }
     color: inherit;
     text-decoration:none;
 }
-#sidebarTitle{
+
+#sidebarTitle {
     padding-top: 20px;
     padding-bottom: 10px;
     margin-right: 60px;
 }
-.sidebarLink{
-    text-align: left;
-    padding-left: 20px;
+
+.sidebarLink {
+    text-align: center;
 }
-.sidebarIcons{
-    font-size: 30px;
-    margin: 3px;
+
+.sidebarIcons {
+    font-size: 60px;
+    margin: 20px;
+}
+
+#identitySelector * {
+    color: black !important;
+    background-color: #333333;
 }
 @media only screen and (max-width: 600px) {
 

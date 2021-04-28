@@ -240,14 +240,14 @@ class Gallery extends React.Component {
             <>
                 <div className="gallery">
 
-                    <div id='layout'>
+                    <div id='layout' className="whiteText">
 
-                        <div id='left' className={leftOpen} >
+                        <div id='left' className={leftOpen}>
                             <div className='icon'
-                                 onClick={this.toggleSidebar} >
+                                 onClick={this.toggleSidebar}>
                                 &equiv;
                             </div>
-                            <div className={`sidebar ${leftOpen}`} >
+                            <div className={`sidebar ${leftOpen}`}>
                                 <div className='header'>
 
                                 </div>
@@ -255,20 +255,17 @@ class Gallery extends React.Component {
                                     <div className='sidebarLink'>
                                         <a href='/'>
                                             <FaIcons.FaHome className="sidebarIcons"/>
-                                            NFTs Minter
                                         </a>
                                     </div>
 
                                     <div className='sidebarLink'>
                                         <a href='/gallery'>
                                             <FaIcons.FaImages className="sidebarIcons"/>
-                                            Gallery
                                         </a>
                                     </div>
 
                                     <div className='sidebarLink'>
                                         <FaIcons.FaInfo className="sidebarIcons"/>
-                                        About
                                     </div>
 
                                 </div>

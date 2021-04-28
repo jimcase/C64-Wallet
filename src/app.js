@@ -1,11 +1,12 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {api} from './api';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Minter from "./views/Minter";
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Gallery from "./views/Gallery";
 import About from "./views/About";
 import Wallet from "./views/Wallet";
+import "./assets/css/layout.css";
 
 const App = () => {
     const [successText, setSuccessText] = useState(null);

@@ -9,7 +9,10 @@
 
 .imgPreview {
     padding: 20%;
+}
 
+.layout * {
+    color: black;
 }
 
 .cell {

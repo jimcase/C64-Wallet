@@ -78,7 +78,7 @@ class MintCart extends React.Component {
                                         </div>
                                     </div>
                                 </li>
-                                <li className="items even">
+                                <li className="items odd">
 
                                     <div className="infoWrap">
                                         <div className="cartSection">

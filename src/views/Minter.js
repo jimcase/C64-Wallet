@@ -4,7 +4,7 @@ import {Col, Container, Form, Row} from 'react-bootstrap';
 import Magnifier from 'react-magnifier';
 
 import "../assets/scss/layout.scss";
-import "../assets/css/layout.css";
+
 
 import * as FaIcons from "react-icons/fa";
 import mime from 'mime-types';
@@ -301,14 +301,14 @@ class Minter extends React.Component {
                 <div className="App">
 
 
-                    <div id='layout'>
+                    <div id='layout' className="whiteText">
 
-                        <div id='left' className={leftOpen} >
+                        <div id='left' className={leftOpen}>
                             <div className='icon'
-                                 onClick={this.toggleSidebar} >
+                                 onClick={this.toggleSidebar}>
                                 &equiv;
                             </div>
-                            <div className={`sidebar ${leftOpen}`} >
+                            <div className={`sidebar ${leftOpen}`}>
                                 <div className='header'>
 
                                 </div>
@@ -316,20 +316,17 @@ class Minter extends React.Component {
                                     <div className='sidebarLink'>
                                         <a href='/'>
                                             <FaIcons.FaHome className="sidebarIcons"/>
-                                            NFTs Minter
                                         </a>
                                     </div>
 
                                     <div className='sidebarLink'>
                                         <a href='/gallery'>
                                             <FaIcons.FaImages className="sidebarIcons"/>
-                                            Gallery
                                         </a>
                                     </div>
 
                                     <div className='sidebarLink'>
                                         <FaIcons.FaInfo className="sidebarIcons"/>
-                                        About
                                     </div>
 
                                 </div>
@@ -371,7 +368,9 @@ class Minter extends React.Component {
 
                                                                 <div>
                                                                     <h3>PGP Sign</h3>
-                                                                    <Form.Label>Select identity</Form.Label>
+                                                                    <Form.Label id="identitySelector"
+                                                                                className="blackText">Select
+                                                                        identity</Form.Label>
                                                                     <Form.Control as="select">
                                                                         <option>artist@nftify.io</option>
                                                                         <option>personal@gmail.com</option>
