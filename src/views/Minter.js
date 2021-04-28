@@ -383,12 +383,11 @@ class Minter extends React.Component {
                                                                 <pre
                                                                     id="base64ContentMeta">{this.state.base64}
                                                                 </pre>
-                                                                <h5>Size</h5>
-                                                                <p>{this.state.base64Size} bytes</p>
-                                                                <p>{this.state.base64Size / 1024} kb</p>
+                                                                <p>Size <span>{this.state.base64Size} bytes</span>
+                                                                    <span>{this.state.base64Size / 1024} kb</span></p>
 
 
-                                                                <p>Num chunks: {this.state.fileChunks.length}</p>
+                                                                <p>Total: {this.state.fileChunks.length} Txs</p>
 
                                                                 {this.state.metadataTxsPreview
                                                                 && this.state.metadataTxsPreview.length > 0 ? (
@@ -409,7 +408,7 @@ class Minter extends React.Component {
                                                                     </div>
                                                                 ) : null}
 
-                                                                <div>
+                                                                <div id="signSection">
                                                                     <h3>PGP Sign</h3>
                                                                     <Form.Label id="identitySelector"
                                                                                 className="whiteText">

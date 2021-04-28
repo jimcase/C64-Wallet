@@ -21,6 +21,10 @@ html, body {
     padding: 10px;
 }
 
+#signSection {
+    margin-top: 20px;
+}
+
 /* Hide scrollbar for Chrome, Safari and Opera */
 .metadatasJson pre::-webkit-scrollbar {
     display: none;
