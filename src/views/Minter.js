@@ -217,7 +217,7 @@ class Minter extends React.Component {
 
                 // 6. Process next txs
                 while (actualData._nextTx) {
-                    graphqlQuery = `{ transactions( where: { hash: { _eq: "${r.data.data.transactions[0].metadata[0].value._nextTx}" }, metadata: { key: { _eq: "${metadataKey}" } } } ) { metadata { value } } }`
+                    graphqlQuery = "{ transactions( where: { hash: { _eq: " + r.data.data.transactions[0].metadata[0].value._nextTx + " }, metadata: { key: { _eq: " + metadataKey + " } } } ) { metadata { value } } }"
 
                     axios.post(grapqhlEndpoint, {query: graphqlQuery}).then(r => {
                         actualData = r.data.data.transactions[0].metadata[0].value.response.data;
