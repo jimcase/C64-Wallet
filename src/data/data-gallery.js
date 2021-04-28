@@ -4,7 +4,7 @@ export default [
         description: '#a8edea → #fed6e3',
         description2: '#a8edea → #fed6e3',
         css: 'linear-gradient(to top, #a8edea 0%, #fed6e3 100%)',
-        height: 200
+        height: 250
     },
     {
         name: 'Saint Petersburg',
@@ -16,7 +16,7 @@ export default [
         name: 'Deep Blue',
         description: '#e0c3fc → #8ec5fc',
         css: 'linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%)',
-        height: 400
+        height: 600
     },
     {
         name: 'Ripe Malinka',
@@ -28,7 +28,7 @@ export default [
         name: 'Perfect White',
         description: '#fdfbfb → #ebedee',
         css: 'linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%)',
-        height: 400
+        height: 300
     },
     {
         name: 'Near Moon',
@@ -40,7 +40,7 @@ export default [
         name: 'Wild Apple',
         description: '#d299c2 → #fef9d7',
         css: 'linear-gradient(to top, #d299c2 0%, #fef9d7 100%)',
-        height: 200
+        height: 250
     },
     {
         name: 'Ladoga Bottom',
@@ -52,7 +52,7 @@ export default [
         name: 'Sunny Morning',
         description: '#f6d365 → #fda085',
         css: 'linear-gradient(120deg, #f6d365 0%, #fda085 100%)',
-        height: 200
+        height: 250
     },
     {
         name: 'Lemon Gate',
@@ -64,7 +64,7 @@ export default [
         name: 'Salt Mountain',
         description: ' #FFFEFF → #D7FFFE',
         css: 'linear-gradient(-225deg, #FFFEFF 0%, #D7FFFE 100%)',
-        height: 200
+        height: 250
     },
     {
         name: 'New York',
@@ -82,6 +82,6 @@ export default [
         name: 'Japan Blush',
         description: ' #ddd6f3 → #faaca8',
         css: 'linear-gradient(-20deg, #ddd6f3 0%, #faaca8 100%, #faaca8 100%)',
-        height: 200
+        height: 250
     }
 ]

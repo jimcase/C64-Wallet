@@ -1,17 +1,16 @@
 import React from "react";
-import {Button, Col, Image, Row} from "react-bootstrap";
-import { render } from 'react-dom'
+import {Col, Row} from "react-bootstrap";
 import "../assets/css/gallery.css"
 import lodash from 'lodash'
 import data from './../data/data-gallery'
 import endpoints from './../data/endpoints/endpoints'
 
-import { Grid, Slug, Fade } from 'mauerwerk'
-import Sidebar from "../components/Sidebar";
+import {Fade, Grid, Slug} from 'mauerwerk'
 import * as FaIcons from "react-icons/fa";
 import {extendMoment} from 'moment-range';
 import Moment from 'moment';
 import GalleryHeader from "./GalleryHeader";
+import Magnifier from "react-magnifier";
 // core components
 const moment = extendMoment(Moment);
 
@@ -23,9 +22,24 @@ const NFT = ({ toggle, name, height, description, css, maximized }) => (
         <Fade show={maximized} delay={maximized ? 400 : 0}>
             <div className="details">
                 <Slug delay={600}>
-                    <div className="circle" style={{ background: css }} />
+                    <div className="nftView" style={{background: css}}>
+                        <Row>
+                            <Col sm={9}>
+                                <Magnifier
+                                    src="https://images.pexels.com/photos/20787/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=350"/>
+                            </Col>
+                            <Col sm={3}>
+                                <div style={{color: 'black'}}>
+                                    <div>Dimensions: 1500x700</div>
+                                    <div>Size: 64863 bytes</div>
+                                </div>
+                            </Col>
+                        </Row>
+
+
+                    </div>
                     <div className="close">
-                        <span  style={{ cursor: 'pointer' }} onClick={toggle}>X</span>
+                        <span style={{cursor: 'pointer'}} onClick={toggle}>X</span>
                     </div>
                     <h1>{name}</h1>
                     <p>{description}</p>
@@ -34,11 +48,24 @@ const NFT = ({ toggle, name, height, description, css, maximized }) => (
         </Fade>
         <Fade
             show={!maximized}
-            from={{ opacity: 0, transform: 'translate3d(0,140px,0)' }}
-            enter={{ opacity: 1, transform: 'translate3d(0,0px,0)' }}
-            leave={{ opacity: 0, transform: 'translate3d(0,-50px,0)' }}
+            from={{opacity: 0, transform: 'translate3d(0,140px,0)'}}
+            enter={{opacity: 1, transform: 'translate3d(0,0px,0)'}}
+            leave={{opacity: 0, transform: 'translate3d(0,-50px,0)'}}
             delay={maximized ? 0 : 400}>
-            <div className="default">{name}</div>
+
+
+            <Row className="imageShadow imgPreview">
+                <img
+
+                    src="https://images.pexels.com/photos/20787/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=350"
+                    alt="new"
+                />
+            </Row>
+            <Row className="nftInfoPreview">
+                <div className="default">policy: {name}</div>
+            </Row>
+
+
         </Fade>
     </div>
 )
