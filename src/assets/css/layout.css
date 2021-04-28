@@ -103,8 +103,6 @@ canvas#viewport {
 .multiColorTitle {
     background-image: linear-gradient(to left, #DD6168, #ffae19, #e6e600, #198c19, #3883CD, orange, red);
     -webkit-background-clip: text;
-    -moz-background-clip: text;
-    background-clip: text;
     color: transparent;
 }
 
@@ -119,6 +117,10 @@ canvas#viewport {
 #imgToMint {
     border: 10px solid white;
     padding: 5px;
+}
+
+#base64SizeSpan {
+    font-size: 12px;
 }
 
 #identitySelector * {

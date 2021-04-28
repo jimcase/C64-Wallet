@@ -383,7 +383,7 @@ class Minter extends React.Component {
                                                                 <pre
                                                                     id="base64ContentMeta">{this.state.base64}
                                                                 </pre>
-                                                                <p>Size <span>{this.state.base64Size} bytes</span>
+                                                                <p id="base64SizeSpan">Size <span>{this.state.base64Size} bytes</span>
                                                                     <span>{this.state.base64Size / 1024} kb</span></p>
 
 
