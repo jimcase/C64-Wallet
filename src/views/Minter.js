@@ -1,18 +1,13 @@
 import React from "react";
 
-import {Button, Col, Container, Image as Img, Nav, Row, Tab, Form} from 'react-bootstrap';
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {Link} from 'react-router-dom';
+import {Col, Container, Form, Row} from 'react-bootstrap';
 import Magnifier from 'react-magnifier';
-import parseUri from 'parse-uri'
 
 import "../assets/scss/layout.scss";
 import "../assets/css/layout.css";
 
-import * as FaIcons from "react-icons/fa"
-import mime from 'mime-types'
-import {faHammer, faInfoCircle, faPuzzlePiece} from "@fortawesome/free-solid-svg-icons";
-import {faUnsplash} from "@fortawesome/free-brands-svg-icons";
+import * as FaIcons from "react-icons/fa";
+import mime from 'mime-types';
 
 import {api} from "../api";
 import MintCart from "../components/MintCart";
@@ -36,7 +31,8 @@ class Minter extends React.Component {
             fileChunks: [],
             numChunks: 0,
             joinedBase64: '',
-            leftOpen: true
+            leftOpen: true,
+            network: 'testnet'
         };
         // this.myCanvasRef = React.createRef();
         // <canvas id="viewport" ref={(c) => this.setRefCanvas(c)}/>
@@ -152,6 +148,11 @@ class Minter extends React.Component {
     }
 
 
+    getGraphqlUrl() {
+        return `https://graphql-api.${this.state.network}.dandelion.link/`
+    }
+
+
     buildHTTPMetadatasFromFile(customHeaders) {
 
         const HTTP_RESPONSE_METADATUM = 104116116112;
@@ -191,19 +192,47 @@ class Minter extends React.Component {
 
     }
 
-    async getMetadataFromTxId(txId, metadataKey, grapqhlEndpoint) {
+    getAndJoinMetadatasFromTxId(txId, metadataKey, grapqhlEndpoint) {
 
-        let graphqlQuery = "{ transactions( where: { hash: { _eq: "+txId+" }, metadata: { key: { _eq: "+metadataKey+" } } } ) { metadata { value } } }";
+        // var to store joined data from txs
+        let fullData = [];
 
-        axios.post(grapqhlEndpoint, { query: graphqlQuery }).then(r => {
-            let fullData = []
-            let actualData = r.data.data.transactions[0].metadata[0].value.response.data
-            let completeResponse = {}
-            let keepGoing = true;
-            fullData = fullData.concat(actualData);
-            let counter = 0;
-        })
+        // 1. Build query for first tx
+        let graphqlQuery = "{ transactions( where: { hash: { _eq: " + txId + " }, metadata: { key: { _eq: " + metadataKey + " } } } ) { metadata { value } } }";
 
+        let completeResponse = {}
+
+        // 2. Graphql POST request
+        axios.post(grapqhlEndpoint, {query: graphqlQuery}).then(r => {
+
+            // 3. Get metadata from 1est tx
+            let actualData = r.data.data.transactions[0].metadata[0].value.response.data;
+
+            // 4. Check if just one tx
+            if (!actualData._nextTx) {
+                fullData = fullData.concat(actualData);
+            } else {
+                // 5. Add first tx
+                fullData = fullData.concat(actualData);
+
+                // 6. Process next txs
+                while (actualData._nextTx) {
+                    graphqlQuery = `{ transactions( where: { hash: { _eq: "${r.data.data.transactions[0].metadata[0].value._nextTx}" }, metadata: { key: { _eq: "${metadataKey}" } } } ) { metadata { value } } }`
+
+                    axios.post(grapqhlEndpoint, {query: graphqlQuery}).then(r => {
+                        actualData = r.data.data.transactions[0].metadata[0].value.response.data;
+                        // 7. Join tx
+                        fullData = fullData.concat(actualData);
+                    })
+                }
+
+                completeResponse = r.data.data.transactions[0].metadata[0].value;
+                // 8. Store all joined txs in the same http response
+                completeResponse.response.data = fullData;
+            }
+        });
+
+        return completeResponse;
     }
 
 
