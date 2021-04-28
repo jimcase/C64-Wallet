@@ -392,7 +392,8 @@ class Minter extends React.Component {
 
                                                 <Row>
                                                     <Col>
-                                                        <MintCart/>
+                                                        <MintCart image={this.state.joinedBase64}
+                                                                  nChunks={this.state.numChunks - 1}/>
                                                     </Col>
 
                                                 </Row>

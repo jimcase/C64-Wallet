@@ -8,7 +8,8 @@
 }
 
 .imgPreview {
-    padding: 1px;
+    padding: 20%;
+
 }
 
 .cell {
@@ -89,7 +90,7 @@
 }
 
 .imageShadow {
-    /*-webkit-filter: drop-shadow(12px 12px 25px rgba(0,0,0,0.5));*/
+    -webkit-filter: drop-shadow(12px 12px 25px rgba(0, 0, 0, 0.5));
 }
 
 .nftInfoPreview {
