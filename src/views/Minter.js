@@ -179,7 +179,6 @@ class Minter extends React.Component {
         let base64 = '';
         let numChunks = 1;
         for (let i = 0; i < metadataResponses.length; i++) {
-            console.log(metadataResponses[i][this.HTTP_RESPONSE_METADATUM].response.data);
             base64 = base64.concat(metadataResponses[i][this.HTTP_RESPONSE_METADATUM].response.data);
             numChunks++;
         }
