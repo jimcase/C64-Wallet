@@ -14,7 +14,6 @@ import {api} from "../api";
 import MintCart from "../components/MintCart";
 import axios from "axios";
 
-// core components
 
 class Minter extends React.Component {
 
