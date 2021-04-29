@@ -442,7 +442,7 @@ class Minter extends React.Component {
                                                                     </div>
                                                                 ) : null}
                                                                 <div id="signSection">
-                                                                    <h3>PGP Sign</h3>
+                                                                    <h3>Sign</h3>
                                                                     <Form.Label id="identitySelector"
                                                                                 className="whiteText">
                                                                         Select identity</Form.Label>

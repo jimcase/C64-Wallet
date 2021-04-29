@@ -13,6 +13,10 @@ html, body {
     max-height: 200px;
 }
 
+#base64ContentMeta::-webkit-scrollbar {
+    width: 0 !important
+}
+
 #metadataTxsPreview::-webkit-scrollbar {
     width: 0 !important
 }
@@ -36,9 +40,11 @@ html, body {
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
 }
 
+
 .title {
     font-family: myFirstFont;
-    font-size: 35px;
+    font-size: 55px;
+    margin-top: 15px;
 }
 
 .blackText {
@@ -49,8 +55,8 @@ html, body {
     color: white !important;
 }
 
-.left {
-    background-color: #005555;
+#left {
+    box-shadow: 4px 2px 5px -2px black;
 }
 
 #imgPreviewContainer {
@@ -110,6 +116,14 @@ canvas#viewport {
 #imgToMint {
     border: 10px solid white;
     padding: 5px;
+    -webkit-box-shadow: 0 8px 6px -6px black;
+    -moz-box-shadow: 0 8px 6px -6px black;
+    box-shadow: 0 8px 6px -6px black;
+    background-color: rgba(0, 0, 0, 0.1)
+}
+
+#imgToMint:hover {
+    background-color: rgba(0, 0, 0, 0.2)
 }
 
 #base64SizeSpan {
