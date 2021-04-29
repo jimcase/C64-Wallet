@@ -167,7 +167,6 @@ class Minter extends React.Component {
         });
     }
 
-
     getGraphqlUrl() {
         return `https://graphql-api.${this.state.network}.dandelion.link/`
     }
