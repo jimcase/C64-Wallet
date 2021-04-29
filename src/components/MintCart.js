@@ -57,7 +57,7 @@ class MintCart extends React.Component {
             <>
                 <div className="invoice">
                     <div className="wrap cf">
-                        <h1 className="projTitle">Minting Cart</h1>
+                        <h1 className="projTitle">Minting Cart <FaIcons.FaOpencart className="sidebarIcons"/></h1>
 
                         <div className="cart">
 

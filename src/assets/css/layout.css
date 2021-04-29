@@ -11,12 +11,15 @@ html, body {
 
 #metadataTxsPreview {
     max-height: 200px;
-    overflow-y: auto;
+}
+
+#metadataTxsPreview::-webkit-scrollbar {
+    width: 0 !important
 }
 
 .metadatasJson pre {
     color: white;
-    overflow-x: hidden;
+    overflow-x: scroll;
     background-color: #6f6f6f;
     padding: 10px;
 }
@@ -25,16 +28,6 @@ html, body {
     margin-top: 20px;
 }
 
-/* Hide scrollbar for Chrome, Safari and Opera */
-.metadatasJson pre::-webkit-scrollbar {
-    display: none;
-}
-
-/* Hide scrollbar for IE, Edge and Firefox */
-.metadatasJson pre {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
-}
 
 #selectEndpointGallery select option {
     margin: 40px;

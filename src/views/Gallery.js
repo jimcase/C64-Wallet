@@ -295,6 +295,7 @@ class Gallery extends React.Component {
 
                                         getEndpoint={this.handleSelectedEndpoint}
                                     />
+
                                     <Grid
                                         className="grid"
                                         // Arbitrary data, should contain keys, possibly heights, etc.

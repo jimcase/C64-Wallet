@@ -22,6 +22,7 @@ class Minter extends React.Component {
         super(props);
 
         this.MAX_SIZE = 14336; //14kb
+        this.HTTP_RESPONSE_METADATUM = 104116116112;
 
         this.state = {
             file: '',
@@ -127,7 +128,7 @@ class Minter extends React.Component {
         }, () => {
 
             //console.log(this.state.fileChunks);
-            this.joinBase64(this.state.fileChunks);
+            //this.joinBase64(this.state.fileChunks);
 
             this.buildHTTPMetadatasFromFile(0);
 
@@ -172,17 +173,29 @@ class Minter extends React.Component {
     }
 
 
-    buildBase64From(customHeaders) {
+    buildBase64FromOnChainMetadata(onChainMetadata) {
 
-        let metadataResponses = this.state.metadataTxsPreview;
+        let metadataResponses = onChainMetadata;
 
+        let base64 = '';
+        let numChunks = 1;
+        for (let i = 0; i < metadataResponses.length; i++) {
+            console.log(metadataResponses[i][this.HTTP_RESPONSE_METADATUM].response.data);
+            base64 = base64.concat(metadataResponses[i][this.HTTP_RESPONSE_METADATUM].response.data);
+            numChunks++;
+        }
+        this.setState({
+            joinedBase64: base64,
+            numChunks: numChunks
+        }, () => {
 
+        });
     }
 
     buildHTTPMetadatasFromFile(customHeaders) {
 
         //         const uri = "metadata+cardano://2065e342de1748dd69788f71e7816b61b0e93da942a87a5a334d6a9a3defdc2a?network=testnet&key=104116116112&type=http-response"
-        const HTTP_RESPONSE_METADATUM = 104116116112;
+
 
         let metadataObj = {};
         let headers = {};
@@ -198,7 +211,9 @@ class Minter extends React.Component {
         headers['Content-Transfer-Encoding'] = "base64"
 
         // split data in diff txs
+        let hash = "";
         let _nextTx = "_PLACEHOLDER_";
+        let sig = "R8UK...eGb/A==";
         let bas64Chunks = this.state.fileChunks;
         //console.log("bas64Chunks");
         //console.log(bas64Chunks);
@@ -206,13 +221,15 @@ class Minter extends React.Component {
         let metadataTxs = []
         for (let i = 0; i < bas64Chunks.length; i++) {
             metadataObj = {}
-            metadataObj[HTTP_RESPONSE_METADATUM] = {
-                _nextTx: _nextTx, // TODO get next tx hash, bas64Chunks.length-1 times
+            metadataObj[this.HTTP_RESPONSE_METADATUM] = {
+                ipfs: hash,
+                sig: sig,
                 headers: headers,
                 response:
                     {
                         data: bas64Chunks[i]
-                    }
+                    },
+                _nextTx: _nextTx, // TODO get next tx hash, bas64Chunks.length-1 times
             }
             //console.log(i);
             //console.log(bas64Chunks[i]);
@@ -223,7 +240,7 @@ class Minter extends React.Component {
             metadataTxsPreview: metadataTxs,
 
         }, () => {
-
+            this.buildBase64FromOnChainMetadata(this.state.metadataTxsPreview);
         });
 
     }
@@ -336,7 +353,6 @@ class Minter extends React.Component {
             <>
                 <div className="App">
 
-
                     <div id='layout' className="whiteText">
 
                         <div id='left' className={leftOpen}>
@@ -386,13 +402,9 @@ class Minter extends React.Component {
                                             {this.state.loading ? (
                                                 <span className="nk-spinner"/>
                                             ) : null}
-
-
                                         </h3>
                                         <input type="file" accept=".jpg,.jpeg,.png,.gif,.svg"
                                                onChange={this.handleChange}/>
-
-
                                     </div>
                                     {this.state.file ? (
                                         <div>
@@ -407,19 +419,18 @@ class Minter extends React.Component {
                                                                     <pre
                                                                         id="base64ContentMeta"> {(JSON.stringify(this.state.base64))}
                                                                 </pre>
-                                                                    <p id="base64SizeSpan">Size <span>{this.state.base64Size} bytes</span>
-                                                                        <span>{this.state.base64Size / 1024} kb</span>
+                                                                    <p id="base64SizeSpan">Size:
+                                                                        <span>{this.state.base64Size} bytes</span>
+
                                                                     </p>
+                                                                    <p>Total: {this.state.fileChunks.length} Txs</p>
 
+                                                                    {this.state.metadataTxsPreview
+                                                                    && this.state.metadataTxsPreview.length > 0 ? (
 
-                                                                <p>Total: {this.state.fileChunks.length} Txs</p>
+                                                                        <div id="metadataTxsPreview">
 
-                                                                {this.state.metadataTxsPreview
-                                                                && this.state.metadataTxsPreview.length > 0 ? (
-
-                                                                    <div id="metadataTxsPreview">
-
-                                                                        {this.state.metadataTxsPreview.map(((meta, index) => (
+                                                                            {this.state.metadataTxsPreview.map(((meta, index) => (
 
                                                                             <div className="metadatasJson">
                                                                                 <pre
@@ -428,11 +439,8 @@ class Minter extends React.Component {
                                                                                 </pre>
                                                                             </div>
                                                                         )))}
-
-
                                                                     </div>
                                                                 ) : null}
-
                                                                 <div id="signSection">
                                                                     <h3>PGP Sign</h3>
                                                                     <Form.Label id="identitySelector"
@@ -447,7 +455,6 @@ class Minter extends React.Component {
                                                                 </div>
                                                             </Col>
                                                             <Col sm={6}>
-
                                                                 <Magnifier id="imgToMint"
                                                                            src={this.state.joinedBase64}/>
                                                             </Col>
@@ -457,28 +464,22 @@ class Minter extends React.Component {
                                                     </div>
                                                 ) : null}
 
-
                                                 <Row>
                                                     <Col>
                                                         <MintCart image={this.state.joinedBase64}
                                                                   chunks={this.state.fileChunks}
                                                                   nChunks={this.state.numChunks - 1}/>
                                                     </Col>
-
                                                 </Row>
-
 
                                             </Col>
 
-
                                         </Row>
-
                                     </div>
                                 ) : null}
                                 </Container>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </>
