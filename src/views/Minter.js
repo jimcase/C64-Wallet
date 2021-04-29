@@ -4,6 +4,7 @@ import {Col, Container, Form, Row} from 'react-bootstrap';
 import Magnifier from 'react-magnifier';
 
 import "../assets/scss/layout.scss";
+import "../assets/scss/loader.scss";
 
 
 import * as FaIcons from "react-icons/fa";
@@ -33,7 +34,8 @@ class Minter extends React.Component {
             joinedBase64: '',
             leftOpen: true,
             network: 'testnet',
-            metadataTxsPreview: []
+            metadataTxsPreview: [],
+            loading: false,
         };
         // this.myCanvasRef = React.createRef();
         // <canvas id="viewport" ref={(c) => this.setRefCanvas(c)}/>
@@ -78,6 +80,7 @@ class Minter extends React.Component {
             joinedBase64: base64,
             numChunks: numChunks
         }, () => {
+
         });
     }
 
@@ -85,7 +88,7 @@ class Minter extends React.Component {
     splitBase64(base64) {
 
         this.setState({
-            showLoading: true
+            loading: true
         });
 
         // Get num iterations, probably float
@@ -127,8 +130,9 @@ class Minter extends React.Component {
             this.joinBase64(this.state.fileChunks);
 
             this.buildHTTPMetadatasFromFile(0);
+
             this.setState({
-                showLoading: false
+                loading: false
             });
         });
     }
@@ -136,8 +140,9 @@ class Minter extends React.Component {
     handleChange(event) {
 
         this.setState({
-            showLoading: true
+            loading: true
         });
+
         let file = event.target.files[0];
 
         this.setState({
@@ -151,10 +156,11 @@ class Minter extends React.Component {
                     base64Size: (r.length * (3/4)) - 2,
 
                 }, () => {
-                    this.setState({
-                        showLoading: false
-                    });
+
                     this.splitBase64(this.state.base64);
+                    this.setState({
+                        loading: false
+                    });
                 });
             });
         });
@@ -165,6 +171,13 @@ class Minter extends React.Component {
         return `https://graphql-api.${this.state.network}.dandelion.link/`
     }
 
+
+    buildBase64From(customHeaders) {
+
+        let metadataResponses = this.state.metadataTxsPreview;
+
+
+    }
 
     buildHTTPMetadatasFromFile(customHeaders) {
 
@@ -260,6 +273,7 @@ class Minter extends React.Component {
 
 
     readFileDataAsBase64(f) {
+
         const file = f;
 
         return new Promise((resolve, reject) => {
@@ -367,24 +381,35 @@ class Minter extends React.Component {
                             </div>
                             <div className='content'>
                                 <Container>
-                                <h3>Upload Asset</h3>
-                                <input type="file" accept=".jpg,.jpeg,.png,.gif,.svg" onChange={ this.handleChange}/>
-
-                                {this.state.file ? (
                                     <div>
-                                        <Row id="fileUpdatedInfo">
-                                            <Col sm={12}>
+                                        <h3>Upload Asset
+                                            {this.state.loading ? (
+                                                <span className="nk-spinner"/>
+                                            ) : null}
 
-                                                {this.state.joinedBase64 ? (
-                                                    <div id="imgPreviewContainer">
-                                                        <Row>
-                                                            <Col sm={6}>
-                                                                <h5>Base64</h5>
-                                                                <pre
-                                                                    id="base64ContentMeta">{this.state.base64}
+
+                                        </h3>
+                                        <input type="file" accept=".jpg,.jpeg,.png,.gif,.svg"
+                                               onChange={this.handleChange}/>
+
+
+                                    </div>
+                                    {this.state.file ? (
+                                        <div>
+                                            <Row id="fileUpdatedInfo">
+                                                <Col sm={12}>
+
+                                                    {this.state.joinedBase64 ? (
+                                                        <div id="imgPreviewContainer">
+                                                            <Row>
+                                                                <Col sm={6}>
+                                                                    <h5>Base64</h5>
+                                                                    <pre
+                                                                        id="base64ContentMeta"> {(JSON.stringify(this.state.base64))}
                                                                 </pre>
-                                                                <p id="base64SizeSpan">Size <span>{this.state.base64Size} bytes</span>
-                                                                    <span>{this.state.base64Size / 1024} kb</span></p>
+                                                                    <p id="base64SizeSpan">Size <span>{this.state.base64Size} bytes</span>
+                                                                        <span>{this.state.base64Size / 1024} kb</span>
+                                                                    </p>
 
 
                                                                 <p>Total: {this.state.fileChunks.length} Txs</p>

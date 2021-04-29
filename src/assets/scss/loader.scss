@@ -1,0 +1,27 @@
+// demo styles
+
+// Spinner parameters
+$color: rgba(#fff, .3) !default;
+$color_inner: #fff !default;
+$size: 30px !default;
+$weight: 6px !default;
+$speed: .6s !default;
+
+.nk-spinner {
+  margin-left: 10px;
+  display: inline-block;
+  box-sizing: border-box;
+  width: $size;
+  height: $size;
+  text-indent: -9999em;
+  border: $weight solid $color;
+  border-left: $weight solid $color_inner;
+  border-radius: 50%;
+  animation: nk-spinner $speed infinite linear;
+}
+
+@keyframes nk-spinner {
+  100% {
+    transform: rotate(360deg)
+  }
+}
