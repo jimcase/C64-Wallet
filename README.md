@@ -1,4 +1,6 @@
-# C64 Minter Wallet
+
+## NEW REP for C64 Minter  
+https://github.com/jimcase/C64-Minter
 
 
 **How to use**
